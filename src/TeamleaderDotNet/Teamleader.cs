@@ -1,102 +1,96 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using TeamleaderDotNet.Crm;
 
 namespace TeamleaderDotNet
 {
     public abstract class Teamleader
     {
-        const string ApiUrl = "https://www.teamleader.be/api";
-        const string Version = "1.0.0";
-   
+        private const string ApiUrl = "https://www.teamleader.be/api";
+        private const string Version = "1.0.0";
+        private const int DefaultTimeout = 30;
+
         private readonly string _apiGroup;
         private readonly string _apiSecret;
-        private string _userAgent;
-        private const int _timeOut = 30;
-
-
-        public string getUserAgent()
+        
+        public string GetUserAgent()
         {
-            return string.Format("TeamleaderDotNet/{0} {1}", Version, _userAgent);
+            return string.Format("TeamleaderDotNet/{0}", Version);
         }
 
         protected Teamleader(string apiGroup, string apiSecret)
         {
             _apiGroup = apiGroup;
             _apiSecret = apiSecret;
-            Timeout = _timeOut;
-
+            Timeout = DefaultTimeout;
         }
 
-            /**
-     * Set the timeout
-     * After this time the request will stop.
-     * You should handle any errors triggered by this.
-     *
-     * @param $seconds int timeout in seconds.
-     */
+        /// <summary>
+        /// The timeout for the API call. After this time the request will stop.
+        /// </summary>
         public int Timeout { get; set; }
 
-        
-    /**
-     * Make the call
-     *
-     * @param  string $endPoint The endpoint.
-     * @param  array  $fields   The fields that should be passed.
-     * @return mixed
-     */
-
+        /// <summary>
+        /// Makes the actual call to the Teamleader API
+        /// </summary>
+        /// <typeparam name="T">The result type that is expected</typeparam>
+        /// <param name="endPoint">The endpoint <example>helloWorld.php</example></param>
+        /// <param name="fields">The fields that should be passed</param>
+        /// <returns>The result from the webservice call</returns>
         protected async Task<T> DoCall<T>(string endPoint, List<KeyValuePair<string, string>> fields = null)
-    {
-      
-
-        if(fields == null) fields = new List<KeyValuePair<string, string>>();
-
-        // Add credentials
-        fields.Add(new KeyValuePair<string, string>("api_group", _apiGroup));
-        fields.Add(new KeyValuePair<string, string>("api_secret", _apiSecret));
-        
-        // Build Url
-        var url = string.Format("{0}/{1}", ApiUrl, endPoint);
-        var client = new HttpClient();
-        
-        client.Timeout = TimeSpan.FromSeconds(Timeout);
-        client.DefaultRequestHeaders.Add("User-Agent", getUserAgent());
-
-        HttpResponseMessage response = await client.PostAsync(url, new FormUrlEncodedContent(fields));
-        HttpContent responseContent = response.Content;
-        string jsonContent = responseContent.ReadAsStringAsync().Result;
-
-        if (response.StatusCode == HttpStatusCode.BadRequest)
         {
-            var resultObjects = JObject.Parse(jsonContent);
+            if (fields == null) fields = new List<KeyValuePair<string, string>>();
+    
+            // Add API Credentials
+            fields.Add(new KeyValuePair<string, string>("api_group", _apiGroup));
+            fields.Add(new KeyValuePair<string, string>("api_secret", _apiSecret));
 
+            // Build full Endpoint URL
+            var url = string.Format("{0}/{1}", ApiUrl, endPoint);
 
-            if (resultObjects["reason"] != null)
+            // Init HttpClient
+            var client = new HttpClient
             {
-                throw new Exception(string.Format("Teamleader {0} API returned statuscode 400 Bad Request. Reason: {1}",
-                    url, resultObjects["reason"]));
-            }
-            // in case no JSON could be parsed, log the response in the exception
-            throw new Exception(
-                string.Format("Teamleader {0} API returned statuscode 400 Bad Request. Data returned: {1}",
-                    url, jsonContent));
+                Timeout = TimeSpan.FromSeconds(Timeout)
+            };
+
+            client.DefaultRequestHeaders.Add("User-Agent", GetUserAgent());
+
+            // Call Teamleader API
+            HttpResponseMessage response = await client.PostAsync(url, new FormUrlEncodedContent(fields));
+
+            return ParseHttpResponse<T>(response);
         }
 
+        private T ParseHttpResponse<T>(HttpResponseMessage message)
+        {
+            var responseContent = message.Content;
 
-        return JsonConvert.DeserializeObject<T>(jsonContent); ;
-    
-     
+            var jsonContent = responseContent.ReadAsStringAsync().Result;
+
+            if (message.StatusCode == HttpStatusCode.BadRequest)
+            {
+                var resultObjects = JObject.Parse(jsonContent);
+
+
+                if (resultObjects["reason"] != null)
+                {
+                    throw new Exception(
+                        string.Format("Teamleader {0} API returned statuscode 400 Bad Request. Reason: {1}",
+                            "", resultObjects["reason"]));
+                }
+                // in case no JSON could be parsed, log the response in the exception
+                throw new Exception(
+                    string.Format("Teamleader {0} API returned statuscode 400 Bad Request. Data returned: {1}",
+                        "", jsonContent));
+            }
+
+
+            return JsonConvert.DeserializeObject<T>(jsonContent);
+        }
     }
-
-
-    }
-
- 
 }
