@@ -74,6 +74,8 @@ namespace TeamleaderDotNet
 
             if (message.StatusCode == HttpStatusCode.BadRequest)
             {
+                string url = "";
+
                 var resultObjects = JObject.Parse(jsonContent);
 
 
@@ -81,12 +83,12 @@ namespace TeamleaderDotNet
                 {
                     throw new Exception(
                         string.Format("Teamleader {0} API returned statuscode 400 Bad Request. Reason: {1}",
-                            "", resultObjects["reason"]));
+                            url, resultObjects["reason"]));
                 }
                 // in case no JSON could be parsed, log the response in the exception
                 throw new Exception(
                     string.Format("Teamleader {0} API returned statuscode 400 Bad Request. Data returned: {1}",
-                        "", jsonContent));
+                        url, jsonContent));
             }
 
 

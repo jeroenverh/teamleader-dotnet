@@ -65,7 +65,7 @@ namespace TeamleaderDotNet.Crm
      *
      * @return array
      */
-    public  List<KeyValuePair<string, string>> toArrayForApi()
+    public  List<KeyValuePair<string, string>> ToArrayForApi()
     {
         var r = new List<KeyValuePair<string, string>>();
 
@@ -75,6 +75,7 @@ namespace TeamleaderDotNet.Crm
         if(!string.IsNullOrWhiteSpace(Surname))
             r.Add(new KeyValuePair<string, string>("surname", Surname));
 
+        //TODO: Verder uitwerken van ToArrayForApi
         //if ($this->getEmail()) {
         //    $return['email'] = $this->getEmail();
         //}
