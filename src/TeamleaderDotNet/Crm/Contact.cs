@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using TeamleaderDotNet.Utils;
 
 namespace TeamleaderDotNet.Crm
 {
@@ -6,52 +8,75 @@ namespace TeamleaderDotNet.Crm
     {
         public int Id { get; set; }
 
+        [TeamleaderDataType(Name = "forename")]
         public string Forename { get; set; }
-        
+
+        [TeamleaderDataType(Name = "surname")]
         public string Surname { get; set; }
-        
+
+        [TeamleaderDataType(Name = "email")]
         public string Email { get; set; }
-        
+
+        [TeamleaderDataType(Name = "telephone")]
         public string Telephone { get; set; }
-        
+
+        [TeamleaderDataType(Name = "gsm")]
         public string Gsm { get; set; }
 
+        [TeamleaderDataType(Name = "fax")]
         public string Fax { get; set; }
-        
+
+        [TeamleaderDataType(Name = "website")]
         public string Website { get; set; }
-        
+
+        [TeamleaderDataType(Name = "street")]
         public string Street { get; set; }
-        
+
+        [TeamleaderDataType(Name = "number")]
         public string Number { get; set; }
 
+        [TeamleaderDataType(Name = "zipcode")]
         public string Zipcode { get; set; }
-        
+
+        [TeamleaderDataType(Name = "city")]
         public string City { get; set; }
-        
+
+        [TeamleaderDataType(Name = "country")]
         public string Country { get; set; }
 
+        [TeamleaderDataType(Name = "extraaddresses")]
         public string[] ExtraAddresses { get; set; }
 
+        [TeamleaderDataType(Name = "language")]
         public string Language { get; set; }
 
+        [TeamleaderDataType(Name = "gender")]
         public string Gender { get; set; }
-        
+
+        [TeamleaderDataType(Name = "dob")]
         public int Dob { get; set; }
 
+        [TeamleaderDataType(Name = "iban")]
         public string Iban { get; set; }
-        
+
+        [TeamleaderDataType(Name = "bic")]
         public string Bic { get; set; }
-        
+
+        [TeamleaderDataType(Name = "dateadded")]
         public int DateAdded { get; set; }
-        
+
+        [TeamleaderDataType(Name = "dateedited")]
         public int DateEdited { get; set; }
 
+        [TeamleaderDataType(Name = "deleted")]
         public bool Deleted { get; set; }
 
+        [TeamleaderDataType(Name = "status")]
         public string Status { get; set; }
 
         public string[] CustomFields { get; set; }
 
+        [TeamleaderDataType(Name = "getLinkedCompanyIds")]
         public string[] LinkedCompanyIds { get; set; }
 
         public string[] Tags { get; set; }
@@ -67,45 +92,13 @@ namespace TeamleaderDotNet.Crm
      */
     public  List<KeyValuePair<string, string>> ToArrayForApi()
     {
+        return new ApiArrayConvertor().ToArrayForApi(this);
+        
         var r = new List<KeyValuePair<string, string>>();
 
-        if(!string.IsNullOrWhiteSpace(Forename))
-            r.Add(new KeyValuePair<string, string>("forename", Forename));
-
-        if(!string.IsNullOrWhiteSpace(Surname))
-            r.Add(new KeyValuePair<string, string>("surname", Surname));
-
+        
         //TODO: Verder uitwerken van ToArrayForApi
-        //if ($this->getEmail()) {
-        //    $return['email'] = $this->getEmail();
-        //}
-        //if ($this->getTelephone()) {
-        //    $return['telephone'] = $this->getTelephone();
-        //}
-        //if ($this->getCountry()) {
-        //    $return['country'] = $this->getCountry();
-        //}
-        //if ($this->getZipcode()) {
-        //    $return['zipcode'] = $this->getZipcode();
-        //}
-        //if ($this->getCity()) {
-        //    $return['city'] = $this->getCity();
-        //}
-        //if ($this->getStreet()) {
-        //    $return['street'] = $this->getStreet();
-        //}
-        //if ($this->getNumber()) {
-        //    $return['number'] = $this->getNumber();
-        //}
-        //if ($this->getLanguage()) {
-        //    $return['language'] = $this->getLanguage();
-        //}
-        //if ($this->getGender()) {
-        //    $return['gender'] = $this->getGender();
-        //}
-        //if ($this->getDob()) {
-        //    $return['dob'] = $this->getDob();
-        //}
+
         //if ($this->getLinkedCompanyIds()) {
         //    $return['linked_company_ids'] = implode(',', $this->getLinkedCompanyIds());
         //}
@@ -120,5 +113,10 @@ namespace TeamleaderDotNet.Crm
         return r;
     }
 
+    }
+
+    public class TeamleaderDataTypeAttribute : Attribute
+    {
+        public string Name { get; set; }
     }
 }

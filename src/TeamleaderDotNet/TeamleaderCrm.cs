@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using TeamleaderDotNet.Crm;
+using TeamleaderDotNet.Utils;
 
 namespace TeamleaderDotNet
 {
@@ -20,7 +22,7 @@ namespace TeamleaderDotNet
         /// </param>
         /// <param name="modifiedSince">Teamleader will only return contacts that have been added or modified since that timestamp</param>
         /// <returns>An array of contacts matching the search results</returns>
-        public Contact[] GetContacts(int amount = 100, int page = 0, string searchBy = null, int? modifiedSince = null)
+        public Contact[] GetContacts(int amount = 100, int page = 0, string searchBy = null, DateTime? modifiedSince = null)
         {
             var fields = new List<KeyValuePair<string, string>>
             {
@@ -33,9 +35,9 @@ namespace TeamleaderDotNet
                 fields.Add(new KeyValuePair<string, string>("searchby", searchBy));
             }
 
-            //if (modifiedSince.HasValue) {
-            //    $fields['modifiedsince'] = (int) $modifiedSince;
-            //}
+            if (modifiedSince.HasValue) {
+                fields.Add(new KeyValuePair<string, string>("modifiedsince", modifiedSince.Value.ConvertToUnixTime().ToString()));
+            }
 
             return DoCall<Contact[]>("getContacts.php", fields).Result;
         }
@@ -69,7 +71,7 @@ namespace TeamleaderDotNet
             string[] tagsToRemove = null)
         {
             // todo    find a way to update the tags as the api expects
-            var fields = new List<KeyValuePair<string, string>>(contact.toArrayForApi());
+            var fields = new List<KeyValuePair<string, string>>(contact.ToArrayForApi());
 
             fields.Add(new KeyValuePair<string, string>("contact_id", contact.Id.ToString()));
             fields.Add(new KeyValuePair<string, string>("track_changes", trackChanges ? "1" : "0"));
