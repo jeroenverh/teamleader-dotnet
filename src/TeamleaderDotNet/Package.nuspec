@@ -1,0 +1,17 @@
+﻿<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>teamleader-dotnet</id>
+    <title>teamleader-dotnet</title>
+    <description>$description$</description>
+    <version>$version$</version>
+    <authors>jeroenverh</authors>
+    <owners>jeroenverh</owners>
+    <projectUrl>https://github.com/jeroenverh/teamleader-dotnet</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <tags>Teamleader</tags>
+    <dependencies>
+      <dependency id="Newtonsoft.Json" version="6.0.8" />
+    </dependencies>
+  </metadata>
+</package>
