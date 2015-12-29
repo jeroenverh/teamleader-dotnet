@@ -23,7 +23,13 @@ namespace TeamleaderDotNet.Utils
                         var propName = prop.Name;
                         var auth = authAttr.Name;
 
-                        r.Add(new KeyValuePair<string, string>(auth, prop.GetValue(o).ToString()));
+                        var value = prop.GetValue(o);
+
+                        if (value != null)
+                        {
+                            r.Add(new KeyValuePair<string, string>(auth, value.ToString()));
+                        }
+                        
                     }
                 }
             }

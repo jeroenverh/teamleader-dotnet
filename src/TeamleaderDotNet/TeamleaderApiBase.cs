@@ -8,7 +8,7 @@ using Newtonsoft.Json.Linq;
 
 namespace TeamleaderDotNet
 {
-    public abstract class Teamleader
+    public abstract class TeamleaderApiBase
     {
         private const string ApiUrl = "https://www.teamleader.be/api";
         private const string Version = "1.0.0";
@@ -22,7 +22,7 @@ namespace TeamleaderDotNet
             return string.Format("TeamleaderDotNet/{0}", Version);
         }
 
-        protected Teamleader(string apiGroup, string apiSecret)
+        protected TeamleaderApiBase(string apiGroup, string apiSecret)
         {
             _apiGroup = apiGroup;
             _apiSecret = apiSecret;
@@ -35,7 +35,7 @@ namespace TeamleaderDotNet
         public int Timeout { get; set; }
 
         /// <summary>
-        /// Makes the actual call to the Teamleader API
+        /// Makes the actual call to the TeamleaderApiBase API
         /// </summary>
         /// <typeparam name="T">The result type that is expected</typeparam>
         /// <param name="endPoint">The endpoint <example>helloWorld.php</example></param>
@@ -60,7 +60,7 @@ namespace TeamleaderDotNet
 
             client.DefaultRequestHeaders.Add("User-Agent", GetUserAgent());
 
-            // Call Teamleader API
+            // Call TeamleaderApiBase API
             HttpResponseMessage response = await client.PostAsync(url, new FormUrlEncodedContent(fields));
 
             return ParseHttpResponse<T>(response);
@@ -82,17 +82,23 @@ namespace TeamleaderDotNet
                 if (resultObjects["reason"] != null)
                 {
                     throw new Exception(
-                        string.Format("Teamleader {0} API returned statuscode 400 Bad Request. Reason: {1}",
+                        string.Format("TeamleaderApiBase {0} API returned statuscode 400 Bad Request. Reason: {1}",
                             url, resultObjects["reason"]));
                 }
                 // in case no JSON could be parsed, log the response in the exception
                 throw new Exception(
-                    string.Format("Teamleader {0} API returned statuscode 400 Bad Request. Data returned: {1}",
+                    string.Format("TeamleaderApiBase {0} API returned statuscode 400 Bad Request. Data returned: {1}",
                         url, jsonContent));
             }
 
 
             return JsonConvert.DeserializeObject<T>(jsonContent);
         }
+
+
+
+
     }
+
+
 }

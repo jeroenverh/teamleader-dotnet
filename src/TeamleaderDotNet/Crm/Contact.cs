@@ -1,11 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TeamleaderDotNet.Utils;
 
 namespace TeamleaderDotNet.Crm
 {
-    public class Contact
+    public class Contact : Entity
     {
+
+        [TeamleaderDataType(Name = "contact_id")]
         public int Id { get; set; }
 
         [TeamleaderDataType(Name = "forename")]
@@ -83,40 +84,5 @@ namespace TeamleaderDotNet.Crm
 
 
 
-
-        /**
-     * This method will convert a contact to an array that can be used for an
-     * API-request
-     *
-     * @return array
-     */
-    public  List<KeyValuePair<string, string>> ToArrayForApi()
-    {
-        return new ApiArrayConvertor().ToArrayForApi(this);
-        
-        var r = new List<KeyValuePair<string, string>>();
-
-        
-        //TODO: Verder uitwerken van ToArrayForApi
-
-        //if ($this->getLinkedCompanyIds()) {
-        //    $return['linked_company_ids'] = implode(',', $this->getLinkedCompanyIds());
-        //}
-        //if ($this->getTags()) {
-        //    $return['add_tag_by_string'] = implode(',', $this->getTags());
-        //}
-        //if ($this->getCustomFields()) {
-        //    foreach ($this->getCustomFields() as $fieldID => $fieldValue) {
-        //        $return['custom_field_' . $fieldID] = $fieldValue;
-        //    }
-        //}
-        return r;
-    }
-
-    }
-
-    public class TeamleaderDataTypeAttribute : Attribute
-    {
-        public string Name { get; set; }
     }
 }
