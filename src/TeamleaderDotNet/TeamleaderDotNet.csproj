@@ -44,15 +44,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\ITeamleaderClient.cs" />
+    <Compile Include="Common\TeamleaderClient.cs" />
     <Compile Include="Crm\Company.cs" />
     <Compile Include="Crm\Entity.cs" />
     <Compile Include="Crm\PaymentTerm.cs" />
     <Compile Include="Crm\TeamleaderDataTypeAttribute.cs" />
-    <Compile Include="Crm\UnixDateConverter.cs" />
+    <Compile Include="Common\JsonConvertors\UnixDateConverter.cs" />
     <Compile Include="TeamleaderContactsApi.cs" />
     <Compile Include="TeamleaderApi.cs" />
     <Compile Include="TeamleaderCompaniesApi.cs" />
-    <Compile Include="TeamleaderApiBase.cs" />
+    <Compile Include="Common\TeamleaderApiBase.cs" />
     <Compile Include="Crm\Contact.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\ApiArrayConvertor.cs" />

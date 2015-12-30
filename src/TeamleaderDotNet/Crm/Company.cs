@@ -1,5 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json;
+using TeamleaderDotNet.Common.JsonConvertors;
 
 namespace TeamleaderDotNet.Crm
 {
@@ -17,7 +18,7 @@ namespace TeamleaderDotNet.Crm
         [TeamleaderDataType(Name = "website")]
         public string website { get; set; }
 
-        [TeamleaderDataType(Name = "taxcode", UpdateField = "vat_code")]
+        [TeamleaderDataType(Name = "vat_code")]
         public string taxcode { get; set; }
 
         [TeamleaderDataType(Name = "kvk_nummer")]
@@ -64,7 +65,8 @@ namespace TeamleaderDotNet.Crm
         [TeamleaderDataType(Name = "business_type")]
         public string business_type { get; set; }
 
-        [TeamleaderDataType(Name = "language_code", UpdateField = "language")]
+        [TeamleaderDataType(Name = "language")]
+        [JsonProperty(PropertyName = "language_code")]
         public string language { get; set; }
 
         [TeamleaderDataType(Name = "vat_liability")]

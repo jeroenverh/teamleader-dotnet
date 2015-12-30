@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TeamleaderDotNet.Common;
 using TeamleaderDotNet.Crm;
 using TeamleaderDotNet.Utils;
 
@@ -8,8 +9,8 @@ namespace TeamleaderDotNet
 {
     public class TeamleaderCompaniesApi : TeamleaderApiBase
     {
-        public TeamleaderCompaniesApi(string apiGroup, string apiSecret)
-            : base(apiGroup, apiSecret)
+        public TeamleaderCompaniesApi(ITeamleaderClient teamleaderClient)
+            : base(teamleaderClient)
         {
         }
 
@@ -37,7 +38,7 @@ namespace TeamleaderDotNet
             if (add_tag_by_string != null && add_tag_by_string.Any())
                 fields.Add(new KeyValuePair<string, string>("add_tag_by_string", string.Join(",", add_tag_by_string)));
 
-            var companyId =  DoCall<string>("addCompany.php", fields).Result;
+            var companyId =  DoCall<string>("addCompany.php", fields);
 
             return int.Parse(companyId);
         }
@@ -52,7 +53,7 @@ namespace TeamleaderDotNet
             return DoCall<Company>("getCompany.php", new List<KeyValuePair<string, string>>
             {
                 new KeyValuePair<string, string>("company_id", id.ToString())
-            }).Result;  
+            });  
         }
 
         /// <summary>
@@ -61,10 +62,10 @@ namespace TeamleaderDotNet
         /// <param name="id">The ID of the company</param>
         public void DeleteCompany(int id)
         {
-            var r = DoCall<Contact>("deleteCompany.php", new List<KeyValuePair<string, string>>
+            DoCall<Contact>("deleteCompany.php", new List<KeyValuePair<string, string>>
             {
                 new KeyValuePair<string, string>("company_id", id.ToString())
-            }).Result;
+            });
         }
 
     }

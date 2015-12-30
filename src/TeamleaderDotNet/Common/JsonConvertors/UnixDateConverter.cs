@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using TeamleaderDotNet.Utils;
 
-namespace TeamleaderDotNet.Crm
+namespace TeamleaderDotNet.Common.JsonConvertors
 {
     public class UnixDateConverter : JsonConverter
     {
