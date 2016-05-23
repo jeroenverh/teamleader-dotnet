@@ -27,16 +27,27 @@ namespace TeamleaderDotNet
         /// Adds a company to TeamleaderApiBase
         /// </summary>
         /// <returns>The TeamleaderApiBase ID of the newly created company</returns>
-        public int AddCompany(Company company, bool automerge_by_name, bool automerge_by_email, bool automerge_by_vat_code, string[] add_tag_by_string)
+        public int AddCompany(Company company, bool automergeByName, bool automergeByEmail, bool automergeByVatCode, string[] addTagByString, List<KeyValuePair<string, string>> customFields)
         {
             var fields = new List<KeyValuePair<string, string>>(company.ToArrayForApi());
 
-            fields.Add(new KeyValuePair<string, string>("automerge_by_name", automerge_by_name ? "1" : "0"));
-            fields.Add(new KeyValuePair<string, string>("automerge_by_email", automerge_by_email ? "1" : "0"));
-            fields.Add(new KeyValuePair<string, string>("automerge_by_vat_code", automerge_by_vat_code ? "1" : "0"));
+            fields.Add(new KeyValuePair<string, string>("automerge_by_name", automergeByName ? "1" : "0"));
+            fields.Add(new KeyValuePair<string, string>("automerge_by_email", automergeByEmail ? "1" : "0"));
+            fields.Add(new KeyValuePair<string, string>("automerge_by_vat_code", automergeByVatCode ? "1" : "0"));
 
-            if (add_tag_by_string != null && add_tag_by_string.Any())
-                fields.Add(new KeyValuePair<string, string>("add_tag_by_string", string.Join(",", add_tag_by_string)));
+            if (addTagByString != null && addTagByString.Any())
+                fields.Add(new KeyValuePair<string, string>("add_tag_by_string", string.Join(",", addTagByString)));
+
+            if (customFields != null && customFields.Any())
+            {
+                foreach (var customField in customFields)
+                {
+                    fields.Add(new KeyValuePair<string, string>(string.Format("custom_field_{0}", customField.Key), customField.Value));
+                }
+            }
+                
+
+
 
             var companyId =  DoCall<string>("addCompany.php", fields);
 

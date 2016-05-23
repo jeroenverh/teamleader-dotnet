@@ -11,6 +11,9 @@ namespace TeamleaderDotNet
         private readonly ITeamleaderClient _teamleaderClient;
         private TeamleaderContactsApi _contactsApi;
         private TeamleaderCompaniesApi _companiesApi;
+        private TeamleaderCustomFieldsApi _customFieldsApi;
+        private TeamleaderInvoicesApi _invoicesApi;
+        private TeamleaderGeneralApi _generalApi;
 
         public TeamleaderApi(string apiGroup, string apiSecret)
         {
@@ -21,7 +24,31 @@ namespace TeamleaderDotNet
         {
             _teamleaderClient = teamleaderClient;
         }
-        
+
+        public TeamleaderGeneralApi General
+        {
+            get
+            {
+                if (_generalApi == null)
+                {
+                    _generalApi = new TeamleaderGeneralApi(_teamleaderClient);
+                }
+                return _generalApi;
+            }
+        }
+
+        public TeamleaderInvoicesApi Invoices
+        {
+            get
+            {
+                if (_invoicesApi == null)
+                {
+                    _invoicesApi = new TeamleaderInvoicesApi(_teamleaderClient);
+                }
+                return _invoicesApi;
+            }
+        }
+
         public TeamleaderContactsApi Contacts
         {
             get
@@ -43,6 +70,18 @@ namespace TeamleaderDotNet
                     _companiesApi = new TeamleaderCompaniesApi(_teamleaderClient);
                 }
                 return _companiesApi;
+            }
+        }
+
+        public TeamleaderCustomFieldsApi CustomFields
+        {
+            get
+            {
+                if (_customFieldsApi == null)
+                {
+                    _customFieldsApi = new TeamleaderCustomFieldsApi(_teamleaderClient);
+                }
+                return _customFieldsApi;
             }
         }
 

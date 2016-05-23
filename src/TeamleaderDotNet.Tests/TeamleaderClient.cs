@@ -28,6 +28,7 @@ namespace TeamleaderDotNet.Tests
         public string GetParam(string key)
         {
             if (_fields == null || !_fields.Any()) return null;
+
             if (!_fields.Any(f => f.Key == key)) return null;
 
             if (_fields.Count(f => f.Key == key) != 1) throw new Exception("Field cannot occur multiple times");

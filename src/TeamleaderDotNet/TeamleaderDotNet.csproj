@@ -51,6 +51,15 @@
     <Compile Include="Crm\PaymentTerm.cs" />
     <Compile Include="Crm\TeamleaderDataTypeAttribute.cs" />
     <Compile Include="Common\JsonConvertors\UnixDateConverter.cs" />
+    <Compile Include="General\Department.cs" />
+    <Compile Include="CustomFields\CustomField.cs" />
+    <Compile Include="Invoices\CreateInvoiceRequest.cs" />
+    <Compile Include="Invoices\EnumMapper.cs" />
+    <Compile Include="Invoices\PaymentTerm.cs" />
+    <Compile Include="Invoices\VatTariff.cs" />
+    <Compile Include="TeamleaderGeneralApi.cs" />
+    <Compile Include="TeamleaderInvoicesApi.cs" />
+    <Compile Include="TeamleaderCustomFieldsApi.cs" />
     <Compile Include="TeamleaderContactsApi.cs" />
     <Compile Include="TeamleaderApi.cs" />
     <Compile Include="TeamleaderCompaniesApi.cs" />

@@ -5,16 +5,19 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using TeamleaderDotNet.Invoices;
 
 namespace TeamleaderDotNet.Common
 {
     public abstract class TeamleaderApiBase
     {
         private readonly ITeamleaderClient _teamleaderClient;
+        protected readonly EnumMapper _enumMapper;
      
         protected TeamleaderApiBase(ITeamleaderClient teamleaderClient)
         {
             _teamleaderClient = teamleaderClient;
+            _enumMapper = new EnumMapper();
         }
 
         protected T DoCall<T>(string endPoint, List<KeyValuePair<string, string>> fields = null)
@@ -27,7 +30,16 @@ namespace TeamleaderDotNet.Common
 
             var jsonResponse = _teamleaderClient.DoCall(endPoint, fields);
 
-            return JsonConvert.DeserializeObject<T>(jsonResponse.Result);
+            if (typeof (T) == typeof (bool))
+            {
+                var booleanResult = jsonResponse.Result;
+
+                return (T)(object)(booleanResult == "\"OK\"");
+            }
+
+            var result = jsonResponse.Result;
+
+            return JsonConvert.DeserializeObject<T>(result);
         }
     }
 }

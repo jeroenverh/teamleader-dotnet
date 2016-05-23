@@ -22,7 +22,7 @@ namespace TeamleaderDotNet
         //Getting all relationships between contacts and companies
 
 
-        public int AddContact(Contact contact, bool newsletter, bool automerge_by_name, bool automerge_by_email, string[] add_tag_by_string)
+        public int AddContact(Contact contact, bool newsletter, bool automerge_by_name, bool automerge_by_email, string[] add_tag_by_string, List<KeyValuePair<string, string>> customFields)
         {
             var fields = new List<KeyValuePair<string, string>>(contact.ToArrayForApi());
 
@@ -32,6 +32,14 @@ namespace TeamleaderDotNet
 
             if (add_tag_by_string != null && add_tag_by_string.Any())
                 fields.Add(new KeyValuePair<string, string>("add_tag_by_string", string.Join(",", add_tag_by_string)));
+
+            if (customFields != null && customFields.Any())
+            {
+                foreach (var customField in customFields)
+                {
+                    fields.Add(new KeyValuePair<string, string>(string.Format("custom_field_{0}", customField.Key), customField.Value));
+                }
+            }
 
             var contactId = DoCall<string>("addContact.php", fields);
 
@@ -59,7 +67,7 @@ namespace TeamleaderDotNet
         /// <param name="function">the job title the contact holds at the company (eg: HR manager)</param>
         public void AddContactToCompany(int contactId, int companyId, string function)
         {
-            DoCall<Contact>("linkContactToCompany.php", new List<KeyValuePair<string, string>>
+            DoCall<bool>("linkContactToCompany.php", new List<KeyValuePair<string, string>>
             {
                 new KeyValuePair<string, string>("contact_id", contactId.ToString()),
                 new KeyValuePair<string, string>("company_id", companyId.ToString()),
