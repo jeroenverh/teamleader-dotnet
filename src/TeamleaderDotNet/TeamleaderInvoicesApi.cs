@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using TeamleaderDotNet.Common;
 using TeamleaderDotNet.Crm;
@@ -71,6 +72,24 @@ namespace TeamleaderDotNet
         }
 
 
+        public void BookDraftInvoice(int invoiceId)
+        {
+            var fields = new List<KeyValuePair<string, string>>();
 
+            fields.Add(new KeyValuePair<string, string>("invoice_id", invoiceId.ToString()));
+
+            DoCall<string>("bookDraftInvoice.php", fields);
+        }
+
+        public Stream DownloadInvoice(int invoiceId)
+        {
+            var fields = new List<KeyValuePair<string, string>>();
+
+            fields.Add(new KeyValuePair<string, string>("invoice_id", invoiceId.ToString()));
+
+            return DoStreamCall("downloadInvoicePDF.php", fields);
+
+
+        }
     }
 }

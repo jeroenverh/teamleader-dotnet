@@ -1,8 +1,10 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace TeamleaderDotNet.Common
@@ -45,7 +47,7 @@ namespace TeamleaderDotNet.Common
 
             var responseContent = response.Content;
 
-            var jsonContent = responseContent.ReadAsStringAsync().Result;
+            var jsonContent = await responseContent.ReadAsStringAsync();
 
             if (response.StatusCode == HttpStatusCode.BadRequest)
             {
@@ -63,6 +65,30 @@ namespace TeamleaderDotNet.Common
 
 
             return jsonContent;
+
+        }
+
+        public async Task<Stream> DoStreamCall(string endPoint, List<KeyValuePair<string, string>> fields)
+        {
+            // Build full Endpoint URL
+            var url = string.Format("{0}/{1}", _apiUrl, endPoint);
+
+            // Init HttpClient
+            var client = new HttpClient
+            {
+                Timeout = TimeSpan.FromSeconds(_timeOut)
+            };
+
+            client.DefaultRequestHeaders.Add("User-Agent", _userAgent);
+
+            // Call TeamleaderApiBase API
+            HttpResponseMessage response = await client.PostAsync(url, new FormUrlEncodedContent(fields));
+
+            var responseContent = response.Content;
+
+            return await responseContent.ReadAsStreamAsync();
+
+
 
         }
 

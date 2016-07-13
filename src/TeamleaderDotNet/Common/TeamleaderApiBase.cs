@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -40,6 +41,19 @@ namespace TeamleaderDotNet.Common
             var result = jsonResponse.Result;
 
             return JsonConvert.DeserializeObject<T>(result);
+        }
+
+        protected Stream DoStreamCall(string endPoint, List<KeyValuePair<string, string>> fields = null)
+        {
+            if (fields == null) fields = new List<KeyValuePair<string, string>>();
+
+            // Add API Credentials
+            fields.Add(new KeyValuePair<string, string>("api_group", _teamleaderClient.ApiGroup));
+            fields.Add(new KeyValuePair<string, string>("api_secret", _teamleaderClient.ApiSecret));
+
+            var result = _teamleaderClient.DoStreamCall(endPoint, fields);
+           
+            return result.Result;
         }
     }
 }
