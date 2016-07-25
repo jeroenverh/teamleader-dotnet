@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -19,6 +20,14 @@ namespace TeamleaderDotNet.Tests
             _fields = fields;
 
             return _callResult;
+        }
+
+        public Task<Stream> DoStreamCall(string endPoint, List<KeyValuePair<string, string>> fields)
+        {
+            _endPoint = endPoint;
+            _fields = fields;
+
+            return null;
         }
 
         private string _callResult;
