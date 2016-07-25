@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TeamleaderDotNet.Common;
 using TeamleaderDotNet.Crm;
 using TeamleaderDotNet.Utils;
 
@@ -8,8 +9,8 @@ namespace TeamleaderDotNet
 {
     public class TeamleaderContactsApi : TeamleaderApiBase
     {
-        public TeamleaderContactsApi(string apiGroup, string apiSecret)
-            : base(apiGroup, apiSecret)
+        public TeamleaderContactsApi(ITeamleaderClient teamleaderClient)
+            : base(teamleaderClient)
         {
         }
 
@@ -21,7 +22,7 @@ namespace TeamleaderDotNet
         //Getting all relationships between contacts and companies
 
 
-        public int AddContact(Contact contact, bool newsletter, bool automerge_by_name, bool automerge_by_email, string[] add_tag_by_string)
+        public int AddContact(Contact contact, bool newsletter, bool automerge_by_name, bool automerge_by_email, string[] add_tag_by_string, List<KeyValuePair<string, string>> customFields)
         {
             var fields = new List<KeyValuePair<string, string>>(contact.ToArrayForApi());
 
@@ -32,7 +33,15 @@ namespace TeamleaderDotNet
             if (add_tag_by_string != null && add_tag_by_string.Any())
                 fields.Add(new KeyValuePair<string, string>("add_tag_by_string", string.Join(",", add_tag_by_string)));
 
-            var contactId = DoCall<string>("addContact.php", fields).Result;
+            if (customFields != null && customFields.Any())
+            {
+                foreach (var customField in customFields)
+                {
+                    fields.Add(new KeyValuePair<string, string>(string.Format("custom_field_{0}", customField.Key), customField.Value));
+                }
+            }
+
+            var contactId = DoCall<string>("addContact.php", fields);
 
             return int.Parse(contactId);
         }
@@ -47,7 +56,7 @@ namespace TeamleaderDotNet
             return DoCall<Contact>("getContact.php", new List<KeyValuePair<string, string>>
             {
                 new KeyValuePair<string, string>("contact_id", id.ToString())
-            }).Result;
+            });
         }
 
         /// <summary>
@@ -58,7 +67,7 @@ namespace TeamleaderDotNet
         /// <param name="function">the job title the contact holds at the company (eg: HR manager)</param>
         public void AddContactToCompany(int contactId, int companyId, string function)
         {
-            var r = DoCall<Contact>("linkContactToCompany.php", new List<KeyValuePair<string, string>>
+            DoCall<bool>("linkContactToCompany.php", new List<KeyValuePair<string, string>>
             {
                 new KeyValuePair<string, string>("contact_id", contactId.ToString()),
                 new KeyValuePair<string, string>("company_id", companyId.ToString()),
@@ -74,7 +83,7 @@ namespace TeamleaderDotNet
         /// <param name="companyId">ID of the company</param>
         public void RemoveContactFromCompany(int contactId, int companyId)
         {
-            var r = DoCall<Contact>("linkContactToCompany.php", new List<KeyValuePair<string, string>>
+            DoCall<Contact>("linkContactToCompany.php", new List<KeyValuePair<string, string>>
             {
                 new KeyValuePair<string, string>("contact_id", contactId.ToString()),
                 new KeyValuePair<string, string>("company_id", companyId.ToString()),
@@ -108,7 +117,7 @@ namespace TeamleaderDotNet
                 fields.Add(new KeyValuePair<string, string>("modifiedsince", modifiedSince.Value.ConvertToUnixTime().ToString()));
             }
 
-            return DoCall<Contact[]>("getContacts.php", fields).Result;
+            return DoCall<Contact[]>("getContacts.php", fields);
         }
 
         /// <summary>
@@ -117,10 +126,10 @@ namespace TeamleaderDotNet
         /// <param name="id">The ID of the contact</param>
         public void DeleteContact(int id)
         {
-            var r = DoCall<Contact>("deleteContact.php", new List<KeyValuePair<string, string>>
+            DoCall<Contact>("deleteContact.php", new List<KeyValuePair<string, string>>
             {
                 new KeyValuePair<string, string>("contact_id", id.ToString())
-            }).Result;
+            });
         }
 
    
