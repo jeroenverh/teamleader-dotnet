@@ -53,6 +53,7 @@
     <Compile Include="Common\JsonConvertors\UnixDateConverter.cs" />
     <Compile Include="General\Department.cs" />
     <Compile Include="CustomFields\CustomField.cs" />
+    <Compile Include="Invoices\Invoice.cs" />
     <Compile Include="Invoices\CreateInvoiceRequest.cs" />
     <Compile Include="Invoices\EnumMapper.cs" />
     <Compile Include="Invoices\PaymentTerm.cs" />
@@ -70,8 +71,8 @@
     <Compile Include="Utils\UnixTimestampExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Package.nuspec" />
     <None Include="packages.config" />
+    <None Include="TeamleaderDotNet.nuspec" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -14,6 +14,7 @@ namespace TeamleaderDotNet.Common.JsonConvertors
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
             JsonSerializer serializer)
         {
+            if (reader.Value.ToString() == "-1") return null;
             return reader.Value.ToString().UnixTimeToDateTime();
         }
 

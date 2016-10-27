@@ -91,5 +91,17 @@ namespace TeamleaderDotNet
 
 
         }
+
+        public Invoice GetInvoice(int invoiceId)
+        {
+            var fields = new List<KeyValuePair<string, string>>
+            {
+                new KeyValuePair<string, string>("invoice_id", invoiceId.ToString())
+            };
+
+            return DoCall<Invoice>("getInvoice.php", fields);
+        }
+
+
     }
 }
