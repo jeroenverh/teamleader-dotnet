@@ -51,6 +51,7 @@
     <Compile Include="Crm\PaymentTerm.cs" />
     <Compile Include="Crm\TeamleaderDataTypeAttribute.cs" />
     <Compile Include="Common\JsonConvertors\UnixDateConverter.cs" />
+    <Compile Include="General\BookkeepingAccount.cs" />
     <Compile Include="General\Department.cs" />
     <Compile Include="CustomFields\CustomField.cs" />
     <Compile Include="Invoices\Invoice.cs" />
@@ -72,7 +73,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="TeamleaderDotNet.nuspec" />
+    <None Include="TeamleaderDotNet.nuspec">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

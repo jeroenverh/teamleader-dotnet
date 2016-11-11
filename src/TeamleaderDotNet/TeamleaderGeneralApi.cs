@@ -25,5 +25,14 @@ namespace TeamleaderDotNet
             return DoCall<List<Department>>("getDepartments.php", null);
         }
 
+        public List<BookkeepingAccount> GetBookkeepingAccounts(int departmentId)
+        {
+            return DoCall<List<BookkeepingAccount>>("getBookkeepingAccounts.php", 
+                    new List<KeyValuePair<string, string>>()
+                    {
+                        new KeyValuePair<string, string>("sys_department_id", departmentId.ToString())
+                    });
+        }
+
     }
 }
