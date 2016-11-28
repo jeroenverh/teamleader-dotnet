@@ -30,6 +30,10 @@ namespace TeamleaderDotNet
             if(!string.IsNullOrWhiteSpace(createInvoiceRequest.for_attention_of))
                 fields.Add(new KeyValuePair<string, string>("for_attention_of", createInvoiceRequest.for_attention_of));
 
+            if (createInvoiceRequest.layout_id.HasValue)
+                fields.Add(new KeyValuePair<string, string>("layout_id", createInvoiceRequest.layout_id.Value.ToString()));
+
+
             fields.Add(new KeyValuePair<string, string>("payment_term", _enumMapper.MapPaymentTerm(createInvoiceRequest.PaymentTerm)));
 
             int invoiceLineId = 0;
