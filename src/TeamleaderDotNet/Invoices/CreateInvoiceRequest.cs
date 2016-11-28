@@ -39,7 +39,7 @@ namespace TeamleaderDotNet.Invoices
         public string contact_or_company { get; private set; }
         public int contact_or_company_id { get; private set; }
         public int sys_department_id { get; private set; }
-        public int? layout_id { get; private set; }
+        public int? layout_id { get; set; }
 
         public string po_number { get; set; }
         public string for_attention_of { get; set; }
