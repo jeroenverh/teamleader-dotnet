@@ -106,6 +106,17 @@ namespace TeamleaderDotNet
             return DoCall<Invoice>("getInvoice.php", fields);
         }
 
+        public Invoice[] GetInvoices(DateTime date_from, DateTime date_to)
+        {
+            var fields = new List<KeyValuePair<string, string>>
+            {
+                new KeyValuePair<string, string>("date_from", date_from.ToString("dd/MM/yy")),
+                new KeyValuePair<string, string>("date_to", date_to.ToString(("dd/MM/yy")))
+            };
+
+            return DoCall<Invoice[]>("getInvoices.php", fields);
+        }
+
 
     }
 }
