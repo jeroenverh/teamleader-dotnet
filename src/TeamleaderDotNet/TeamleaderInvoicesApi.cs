@@ -15,7 +15,7 @@ namespace TeamleaderDotNet
             : base(teamleaderClient)
         {
         }
-        
+
         public int AddInvoice(CreateInvoiceRequest createInvoiceRequest, List<KeyValuePair<string, string>> customFields)
         {
             if(string.IsNullOrWhiteSpace(createInvoiceRequest.contact_or_company)) throw new Exception();
@@ -117,6 +117,16 @@ namespace TeamleaderDotNet
             return DoCall<Invoice[]>("getInvoices.php", fields);
         }
 
+        public void SendInvoice(int invoiceId, string emailTo, string subject, string text)
+        {
+            var fields = new List<KeyValuePair<string, string>>();
 
+            fields.Add(new KeyValuePair<string, string>("invoice_id", invoiceId.ToString()));
+            fields.Add(new KeyValuePair<string, string>("email_to", emailTo));
+            fields.Add(new KeyValuePair<string, string>("email_subject", subject));
+            fields.Add(new KeyValuePair<string, string>("email_text", text));
+
+            var result = DoCall<string>("sendInvoice.php", fields);
+        }
     }
 }
