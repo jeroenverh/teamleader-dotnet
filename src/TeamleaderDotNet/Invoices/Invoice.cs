@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using TeamleaderDotNet.Common.JsonConvertors;
 using TeamleaderDotNet.Crm;
+using TeamleaderDotNet.General;
 
 namespace TeamleaderDotNet.Invoices
 {
@@ -48,7 +50,10 @@ namespace TeamleaderDotNet.Invoices
         [JsonProperty(PropertyName = "due_date_formatted")]
         public string DueDateFormatted { get; set; }
 
-
-
+        [JsonProperty(PropertyName = "items")]
+        public InvoiceLine[] Items { get; set; }
+        
     }
+
+ 
 }

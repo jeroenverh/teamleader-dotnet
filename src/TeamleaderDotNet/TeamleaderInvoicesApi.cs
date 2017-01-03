@@ -75,6 +75,42 @@ namespace TeamleaderDotNet
             return int.Parse(invoiceId);
         }
 
+        public int AddCreditnote(CreateCreditnoteRequest createCreditnoteRequest)
+        {
+            if (createCreditnoteRequest.InvoiceLines == null || !createCreditnoteRequest.InvoiceLines.Any()) throw new Exception();
+
+            var fields = new List<KeyValuePair<string, string>>();
+
+            fields.Add(new KeyValuePair<string, string>("invoice_id", createCreditnoteRequest.invoice_id.ToString()));
+            
+            int invoiceLineId = 0;
+
+            foreach (var invoiceLine in createCreditnoteRequest.InvoiceLines)
+            {
+                invoiceLineId = invoiceLineId + 1;
+
+                fields.Add(new KeyValuePair<string, string>(string.Format("description_{0}", invoiceLineId), invoiceLine.description));
+
+                fields.Add(new KeyValuePair<string, string>(string.Format("price_{0}", invoiceLineId), invoiceLine.price.ToString()));
+
+                fields.Add(new KeyValuePair<string, string>(string.Format("amount_{0}", invoiceLineId), invoiceLine.amount.ToString()));
+
+                fields.Add(new KeyValuePair<string, string>(string.Format("vat_{0}", invoiceLineId), _enumMapper.MapVat(invoiceLine.VatTariff)));
+
+                if (invoiceLine.product_id.HasValue)
+                    fields.Add(new KeyValuePair<string, string>(string.Format("product_id_{0}", invoiceLineId), invoiceLine.product_id.Value.ToString()));
+
+                if (invoiceLine.account.HasValue)
+                    fields.Add(new KeyValuePair<string, string>(string.Format("account_{0}", invoiceLineId), invoiceLine.account.Value.ToString()));
+            }
+
+            
+
+            var creditNoteId = DoCall<string>("addCreditnote.php", fields);
+
+            return int.Parse(creditNoteId);
+        }
+
 
         public void BookDraftInvoice(int invoiceId)
         {
@@ -92,10 +128,17 @@ namespace TeamleaderDotNet
             fields.Add(new KeyValuePair<string, string>("invoice_id", invoiceId.ToString()));
 
             return DoStreamCall("downloadInvoicePDF.php", fields);
-
-
         }
 
+        public Stream DownloadCreditNote(int creditNoteId)
+        {
+            var fields = new List<KeyValuePair<string, string>>();
+
+            fields.Add(new KeyValuePair<string, string>("creditnote_id", creditNoteId.ToString()));
+
+            return DoStreamCall("downloadCreditnotePDF.php", fields);
+        }
+        
         public Invoice GetInvoice(int invoiceId)
         {
             var fields = new List<KeyValuePair<string, string>>
@@ -128,5 +171,16 @@ namespace TeamleaderDotNet
 
             var result = DoCall<string>("sendInvoice.php", fields);
         }
+
+        public void SetInvoicePaymentStatus(int invoiceId, PaymentStatus paymentStatus)
+        {
+            var fields = new List<KeyValuePair<string, string>>();
+
+            fields.Add(new KeyValuePair<string, string>("invoice_id", invoiceId.ToString()));
+            fields.Add(new KeyValuePair<string, string>("status", paymentStatus.ToString().ToLower()));
+            
+            var result = DoCall<string>("setInvoicePaymentStatus.php", fields);
+        }
+
     }
 }

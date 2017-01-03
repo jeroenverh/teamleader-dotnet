@@ -54,6 +54,7 @@
     <Compile Include="General\BookkeepingAccount.cs" />
     <Compile Include="General\Department.cs" />
     <Compile Include="CustomFields\CustomField.cs" />
+    <Compile Include="Invoices\InvoiceLine.cs" />
     <Compile Include="Invoices\Invoice.cs" />
     <Compile Include="Invoices\CreateInvoiceRequest.cs" />
     <Compile Include="Invoices\EnumMapper.cs" />
