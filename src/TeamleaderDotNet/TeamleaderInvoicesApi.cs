@@ -139,14 +139,14 @@ namespace TeamleaderDotNet
             return DoStreamCall("downloadCreditnotePDF.php", fields);
         }
 
-        public Invoice GetCreditnote(int creditNoteId)
+        public CreditNote GetCreditnote(int creditNoteId)
         {
             var fields = new List<KeyValuePair<string, string>>
             {
                 new KeyValuePair<string, string>("creditnote_id", creditNoteId.ToString())
             };
 
-            return DoCall<Invoice>("getCreditnote.php", fields);
+            return DoCall<CreditNote>("getCreditnote.php", fields);
         }
 
         public Invoice GetInvoice(int invoiceId)

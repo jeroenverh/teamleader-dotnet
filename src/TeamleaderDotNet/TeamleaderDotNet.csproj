@@ -55,6 +55,7 @@
     <Compile Include="General\Department.cs" />
     <Compile Include="CustomFields\CustomField.cs" />
     <Compile Include="Invoices\CreateCreditnoteRequest.cs" />
+    <Compile Include="Invoices\CreditNote.cs" />
     <Compile Include="Invoices\InvoiceLine.cs" />
     <Compile Include="Invoices\Invoice.cs" />
     <Compile Include="Invoices\CreateInvoiceRequest.cs" />
