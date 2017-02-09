@@ -146,7 +146,7 @@ namespace TeamleaderDotNet
                 new KeyValuePair<string, string>("creditnote_id", creditNoteId.ToString())
             };
 
-            return DoCall<Invoice>("getInvoice.php", fields);
+            return DoCall<Invoice>("getCreditnote.php", fields);
         }
 
         public Invoice GetInvoice(int invoiceId)
