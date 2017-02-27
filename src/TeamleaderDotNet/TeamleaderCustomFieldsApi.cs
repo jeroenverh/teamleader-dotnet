@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using TeamleaderDotNet.Common;
 using TeamleaderDotNet.Crm;
 using TeamleaderDotNet.CustomFields;
@@ -20,9 +21,9 @@ namespace TeamleaderDotNet
         /// </summary>
         /// <param name="objectType">The type of object: contact, company, sale, project, invoice, ticket, milestone</param>
         /// <returns>A list of all custom fields for the requested object type</returns>
-        public List<CustomField> GetCustomFields(string objectType)
+        public async Task<List<CustomField>> GetCustomFields(string objectType)
         {
-            return DoCall<List<CustomField>>("getCustomFields.php", new List<KeyValuePair<string, string>>
+            return await DoCall<List<CustomField>>("getCustomFields.php", new List<KeyValuePair<string, string>>
             {
                 new KeyValuePair<string, string>("for", objectType)
             });  

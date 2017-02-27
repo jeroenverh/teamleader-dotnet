@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using TeamleaderDotNet.Common;
 using TeamleaderDotNet.Crm;
 using TeamleaderDotNet.Invoices;
@@ -16,7 +17,7 @@ namespace TeamleaderDotNet
         {
         }
 
-        public int AddInvoice(CreateInvoiceRequest createInvoiceRequest, List<KeyValuePair<string, string>> customFields)
+        public async Task<int> AddInvoice(CreateInvoiceRequest createInvoiceRequest, List<KeyValuePair<string, string>> customFields)
         {
             if(string.IsNullOrWhiteSpace(createInvoiceRequest.contact_or_company)) throw new Exception();
             if(createInvoiceRequest.InvoiceLines == null || !createInvoiceRequest.InvoiceLines.Any()) throw new Exception();
@@ -70,12 +71,12 @@ namespace TeamleaderDotNet
                 }
             }
             
-            var invoiceId = DoCall<string>("addInvoice.php", fields);
+            var invoiceId = await DoCall<string>("addInvoice.php", fields);
 
             return int.Parse(invoiceId);
         }
 
-        public int AddCreditnote(CreateCreditnoteRequest createCreditnoteRequest)
+        public async Task<int> AddCreditnote(CreateCreditnoteRequest createCreditnoteRequest)
         {
             if (createCreditnoteRequest.InvoiceLines == null || !createCreditnoteRequest.InvoiceLines.Any()) throw new Exception();
 
@@ -106,19 +107,19 @@ namespace TeamleaderDotNet
 
             
 
-            var creditNoteId = DoCall<string>("addCreditnote.php", fields);
+            var creditNoteId = await DoCall<string>("addCreditnote.php", fields);
 
             return int.Parse(creditNoteId);
         }
 
 
-        public void BookDraftInvoice(int invoiceId)
+        public async void BookDraftInvoice(int invoiceId)
         {
             var fields = new List<KeyValuePair<string, string>>();
 
             fields.Add(new KeyValuePair<string, string>("invoice_id", invoiceId.ToString()));
 
-            DoCall<string>("bookDraftInvoice.php", fields);
+            await DoCall<string>("bookDraftInvoice.php", fields);
         }
 
         public Stream DownloadInvoice(int invoiceId)
@@ -139,27 +140,27 @@ namespace TeamleaderDotNet
             return DoStreamCall("downloadCreditnotePDF.php", fields);
         }
 
-        public CreditNote GetCreditnote(int creditNoteId)
+        public async Task<CreditNote> GetCreditnote(int creditNoteId)
         {
             var fields = new List<KeyValuePair<string, string>>
             {
                 new KeyValuePair<string, string>("creditnote_id", creditNoteId.ToString())
             };
 
-            return DoCall<CreditNote>("getCreditnote.php", fields);
+            return await DoCall<CreditNote>("getCreditnote.php", fields);
         }
 
-        public Invoice GetInvoice(int invoiceId)
+        public async Task<Invoice> GetInvoice(int invoiceId)
         {
             var fields = new List<KeyValuePair<string, string>>
             {
                 new KeyValuePair<string, string>("invoice_id", invoiceId.ToString())
             };
 
-            return DoCall<Invoice>("getInvoice.php", fields);
+            return await DoCall<Invoice>("getInvoice.php", fields);
         }
 
-        public Invoice[] GetInvoices(DateTime date_from, DateTime date_to)
+        public async Task<Invoice[]> GetInvoices(DateTime date_from, DateTime date_to)
         {
             var fields = new List<KeyValuePair<string, string>>
             {
@@ -167,10 +168,10 @@ namespace TeamleaderDotNet
                 new KeyValuePair<string, string>("date_to", date_to.ToString(("dd/MM/yy")))
             };
 
-            return DoCall<Invoice[]>("getInvoices.php", fields);
+            return await DoCall<Invoice[]>("getInvoices.php", fields);
         }
 
-        public void SendInvoice(int invoiceId, string emailTo, string subject, string text)
+        public async void SendInvoice(int invoiceId, string emailTo, string subject, string text)
         {
             var fields = new List<KeyValuePair<string, string>>();
 
@@ -179,17 +180,17 @@ namespace TeamleaderDotNet
             fields.Add(new KeyValuePair<string, string>("email_subject", subject));
             fields.Add(new KeyValuePair<string, string>("email_text", text));
 
-            var result = DoCall<string>("sendInvoice.php", fields);
+            var result = await DoCall<string>("sendInvoice.php", fields);
         }
 
-        public void SetInvoicePaymentStatus(int invoiceId, PaymentStatus paymentStatus)
+        public async void SetInvoicePaymentStatus(int invoiceId, PaymentStatus paymentStatus)
         {
             var fields = new List<KeyValuePair<string, string>>();
 
             fields.Add(new KeyValuePair<string, string>("invoice_id", invoiceId.ToString()));
             fields.Add(new KeyValuePair<string, string>("status", paymentStatus.ToString().ToLower()));
             
-            var result = DoCall<string>("setInvoicePaymentStatus.php", fields);
+            var result = await DoCall<string>("setInvoicePaymentStatus.php", fields);
         }
 
     }

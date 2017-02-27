@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using TeamleaderDotNet.Common;
 using TeamleaderDotNet.Crm;
 using TeamleaderDotNet.CustomFields;
@@ -20,14 +21,14 @@ namespace TeamleaderDotNet
         /// Getting all departments
         /// </summary>
         /// <returns>A list of all departments</returns>
-        public List<Department> GetDepartments()
+        public async Task<List<Department>> GetDepartments()
         {
-            return DoCall<List<Department>>("getDepartments.php", null);
+            return await DoCall<List<Department>>("getDepartments.php", null);
         }
 
-        public List<BookkeepingAccount> GetBookkeepingAccounts(int departmentId)
+        public async Task<List<BookkeepingAccount>> GetBookkeepingAccounts(int departmentId)
         {
-            return DoCall<List<BookkeepingAccount>>("getBookkeepingAccounts.php", 
+            return await DoCall<List<BookkeepingAccount>>("getBookkeepingAccounts.php", 
                     new List<KeyValuePair<string, string>>()
                     {
                         new KeyValuePair<string, string>("sys_department_id", departmentId.ToString())

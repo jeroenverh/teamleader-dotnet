@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using TeamleaderDotNet.Common;
 using TeamleaderDotNet.Crm;
 using TeamleaderDotNet.Utils;
@@ -27,7 +28,7 @@ namespace TeamleaderDotNet
         /// Adds a company to TeamleaderApiBase
         /// </summary>
         /// <returns>The TeamleaderApiBase ID of the newly created company</returns>
-        public int AddCompany(Company company, bool automergeByName, bool automergeByEmail, bool automergeByVatCode, string[] addTagByString, List<KeyValuePair<string, string>> customFields)
+        public async Task<int> AddCompany(Company company, bool automergeByName, bool automergeByEmail, bool automergeByVatCode, string[] addTagByString, List<KeyValuePair<string, string>> customFields)
         {
             var fields = new List<KeyValuePair<string, string>>(company.ToArrayForApi());
 
@@ -49,7 +50,7 @@ namespace TeamleaderDotNet
 
 
 
-            var companyId =  DoCall<string>("addCompany.php", fields);
+            var companyId =  await DoCall<string>("addCompany.php", fields);
 
             return int.Parse(companyId);
         }
@@ -59,9 +60,9 @@ namespace TeamleaderDotNet
         /// </summary>
         /// <param name="id">The ID of the company</param>
         /// <returns>The detailed information of the company</returns>
-        public Company GetCompany(int id)
+        public async Task<Company> GetCompany(int id)
         {
-            return DoCall<Company>("getCompany.php", new List<KeyValuePair<string, string>>
+            return await DoCall<Company>("getCompany.php", new List<KeyValuePair<string, string>>
             {
                 new KeyValuePair<string, string>("company_id", id.ToString())
             });  
@@ -71,9 +72,9 @@ namespace TeamleaderDotNet
         /// Deletes a company
         /// </summary>
         /// <param name="id">The ID of the company</param>
-        public void DeleteCompany(int id)
+        public async void DeleteCompany(int id)
         {
-            DoCall<Contact>("deleteCompany.php", new List<KeyValuePair<string, string>>
+            await DoCall<Contact>("deleteCompany.php", new List<KeyValuePair<string, string>>
             {
                 new KeyValuePair<string, string>("company_id", id.ToString())
             });

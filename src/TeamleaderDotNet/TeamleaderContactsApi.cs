@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using TeamleaderDotNet.Common;
 using TeamleaderDotNet.Crm;
 using TeamleaderDotNet.Utils;
@@ -22,7 +23,7 @@ namespace TeamleaderDotNet
         //Getting all relationships between contacts and companies
 
 
-        public int AddContact(Contact contact, bool newsletter, bool automerge_by_name, bool automerge_by_email, string[] add_tag_by_string, List<KeyValuePair<string, string>> customFields)
+        public async Task<int> AddContact(Contact contact, bool newsletter, bool automerge_by_name, bool automerge_by_email, string[] add_tag_by_string, List<KeyValuePair<string, string>> customFields)
         {
             var fields = new List<KeyValuePair<string, string>>(contact.ToArrayForApi());
 
@@ -41,7 +42,7 @@ namespace TeamleaderDotNet
                 }
             }
 
-            var contactId = DoCall<string>("addContact.php", fields);
+            var contactId = await DoCall<string>("addContact.php", fields);
 
             return int.Parse(contactId);
         }
@@ -51,9 +52,9 @@ namespace TeamleaderDotNet
         /// </summary>
         /// <param name="id">The ID of the contact</param>
         /// <returns>A contact's details</returns>
-        public Contact GetContact(int id)
+        public async Task<Contact> GetContact(int id)
         {
-            return DoCall<Contact>("getContact.php", new List<KeyValuePair<string, string>>
+            return await DoCall<Contact>("getContact.php", new List<KeyValuePair<string, string>>
             {
                 new KeyValuePair<string, string>("contact_id", id.ToString())
             });
@@ -65,9 +66,9 @@ namespace TeamleaderDotNet
         /// <param name="contactId">ID of the contact</param>
         /// <param name="companyId">ID of the company</param>
         /// <param name="function">the job title the contact holds at the company (eg: HR manager)</param>
-        public void AddContactToCompany(int contactId, int companyId, string function)
+        public async void AddContactToCompany(int contactId, int companyId, string function)
         {
-            DoCall<bool>("linkContactToCompany.php", new List<KeyValuePair<string, string>>
+            await DoCall<bool>("linkContactToCompany.php", new List<KeyValuePair<string, string>>
             {
                 new KeyValuePair<string, string>("contact_id", contactId.ToString()),
                 new KeyValuePair<string, string>("company_id", companyId.ToString()),
@@ -81,9 +82,9 @@ namespace TeamleaderDotNet
         /// </summary>
         /// <param name="contactId">ID of the contact</param>
         /// <param name="companyId">ID of the company</param>
-        public void RemoveContactFromCompany(int contactId, int companyId)
+        public async void RemoveContactFromCompany(int contactId, int companyId)
         {
-            DoCall<Contact>("linkContactToCompany.php", new List<KeyValuePair<string, string>>
+            await DoCall<Contact>("linkContactToCompany.php", new List<KeyValuePair<string, string>>
             {
                 new KeyValuePair<string, string>("contact_id", contactId.ToString()),
                 new KeyValuePair<string, string>("company_id", companyId.ToString()),
@@ -99,7 +100,7 @@ namespace TeamleaderDotNet
         /// <param name="searchBy">A search string. TeamleaderApiBase will try to match each part of the string to the forename, surname, company name and email address.</param>
         /// <param name="modifiedSince">TeamleaderApiBase will only return contacts that have been added or modified since that timestamp</param>
         /// <returns>An array of contacts matching the search results</returns>
-        public Contact[] GetContacts(int amount = 100, int page = 0, string searchBy = null, DateTime? modifiedSince = null)
+        public async Task<Contact[]> GetContacts(int amount = 100, int page = 0, string searchBy = null, DateTime? modifiedSince = null)
         {
             var fields = new List<KeyValuePair<string, string>>
             {
@@ -117,16 +118,16 @@ namespace TeamleaderDotNet
                 fields.Add(new KeyValuePair<string, string>("modifiedsince", modifiedSince.Value.ConvertToUnixTime().ToString()));
             }
 
-            return DoCall<Contact[]>("getContacts.php", fields);
+            return await DoCall<Contact[]>("getContacts.php", fields);
         }
 
         /// <summary>
         /// Deletes a contact
         /// </summary>
         /// <param name="id">The ID of the contact</param>
-        public void DeleteContact(int id)
+        public async void DeleteContact(int id)
         {
-            DoCall<Contact>("deleteContact.php", new List<KeyValuePair<string, string>>
+            await DoCall<Contact>("deleteContact.php", new List<KeyValuePair<string, string>>
             {
                 new KeyValuePair<string, string>("contact_id", id.ToString())
             });

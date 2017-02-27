@@ -21,7 +21,7 @@ namespace TeamleaderDotNet.Common
             _enumMapper = new EnumMapper();
         }
 
-        protected T DoCall<T>(string endPoint, List<KeyValuePair<string, string>> fields = null)
+        protected async Task<T> DoCall<T>(string endPoint, List<KeyValuePair<string, string>> fields = null)
         {
             if (fields == null) fields = new List<KeyValuePair<string, string>>();
     
@@ -29,16 +29,16 @@ namespace TeamleaderDotNet.Common
             fields.Add(new KeyValuePair<string, string>("api_group", _teamleaderClient.ApiGroup));
             fields.Add(new KeyValuePair<string, string>("api_secret", _teamleaderClient.ApiSecret));
 
-            var jsonResponse = _teamleaderClient.DoCall(endPoint, fields);
+            var jsonResponse = await _teamleaderClient.DoCall(endPoint, fields);
 
             if (typeof (T) == typeof (bool))
             {
-                var booleanResult = jsonResponse.Result;
+                var booleanResult = jsonResponse;
 
                 return (T)(object)(booleanResult == "\"OK\"");
             }
 
-            var result = jsonResponse.Result;
+            var result = jsonResponse;
 
             return JsonConvert.DeserializeObject<T>(result);
         }
