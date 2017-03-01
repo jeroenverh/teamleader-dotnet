@@ -19,7 +19,7 @@ namespace TeamleaderDotNet.Tests
             _endPoint = endPoint;
             _fields = fields;
 
-            return _callResult;
+            return await Task.FromResult(_callResult);            
         }
 
         public Task<Stream> DoStreamCall(string endPoint, List<KeyValuePair<string, string>> fields)

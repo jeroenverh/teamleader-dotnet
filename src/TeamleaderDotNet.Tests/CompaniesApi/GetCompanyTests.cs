@@ -7,14 +7,14 @@ namespace TeamleaderDotNet.Tests.CompaniesApi
     public class GetCompanyTests
     {
         [TestMethod]
-        public void When_we_get_a_company_we_should_send_a_correct_request()
+        public async void When_we_get_a_company_we_should_send_a_correct_request()
         {
             var tlMockClient = new MockTeamleaderClient();
             tlMockClient.LoadResultFromFile(@"CrmCompanies\getCompany.txt");
 
             var tlApi = new TeamleaderApi(tlMockClient);
 
-            var company = tlApi.Companies.GetCompany(123);
+            var company = await tlApi.Companies.GetCompany(123);
 
             Assert.AreEqual(tlMockClient.ApiGroup, tlMockClient.GetParam("api_group"));
             Assert.AreEqual(tlMockClient.ApiSecret, tlMockClient.GetParam("api_secret"));
@@ -24,13 +24,13 @@ namespace TeamleaderDotNet.Tests.CompaniesApi
 
 
         [TestMethod]
-        public void When_we_get_a_company_all_fields_should_map_correctly()
+        public async void When_we_get_a_company_all_fields_should_map_correctly()
         {
             var tlMockClient = new MockTeamleaderClient();
             tlMockClient.LoadResultFromFile(@"CrmCompanies\getCompany.txt");
 
             var tlApi = new TeamleaderApi(tlMockClient);
-            var company = tlApi.Companies.GetCompany(123);
+            var company = await tlApi.Companies.GetCompany(123);
 
             Assert.AreEqual(2916166, company.Id);
             Assert.AreEqual("Teamleader", company.name);
