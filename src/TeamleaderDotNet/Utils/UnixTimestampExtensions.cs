@@ -44,7 +44,7 @@ namespace TeamleaderDotNet.Utils
         /// <returns>Returns a DateTime object that represents value of the Unix time.</returns>
         public static DateTime UnixTimeToDateTime(this string unixtime)
         {
-            return UnixTimeToDateTime(long.Parse(unixtime.ToString()));
+            return !string.IsNullOrEmpty(unixtime) ? UnixTimeToDateTime(long.Parse(unixtime)) : DateTime.MinValue;
         }
 
     }
