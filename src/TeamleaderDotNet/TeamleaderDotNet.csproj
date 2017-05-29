@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Common\ITeamleaderClient.cs" />
     <Compile Include="Common\TeamleaderClient.cs" />
+    <Compile Include="Common\Throttler.cs" />
     <Compile Include="Crm\Company.cs" />
     <Compile Include="Crm\Entity.cs" />
     <Compile Include="Crm\PaymentTerm.cs" />
