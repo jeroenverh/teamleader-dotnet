@@ -11,6 +11,7 @@ namespace TeamleaderDotNet
         private readonly ITeamleaderClient _teamleaderClient;
         private TeamleaderContactsApi _contactsApi;
         private TeamleaderCompaniesApi _companiesApi;
+        private TeamleaderDealsApi _dealsApi;
         private TeamleaderCustomFieldsApi _customFieldsApi;
         private TeamleaderInvoicesApi _invoicesApi;
         private TeamleaderGeneralApi _generalApi;
@@ -72,6 +73,8 @@ namespace TeamleaderDotNet
                 return _companiesApi;
             }
         }
+
+        public TeamleaderDealsApi Deals => _dealsApi ?? (_dealsApi = new TeamleaderDealsApi(_teamleaderClient));
 
         public TeamleaderCustomFieldsApi CustomFields
         {
