@@ -58,37 +58,37 @@ namespace TeamleaderDotNet.Deals
         [TeamleaderDataType(Name = "entry_date")]
         [JsonConverter(typeof(UnixDateConverter))]
         [JsonProperty(PropertyName = "entry_date")]
-        public DateTime EntryDate { get; set; }
+        public DateTime? EntryDate { get; set; }
 
         [TeamleaderDataType(Name = "latest_activity_date")]
         [JsonConverter(typeof(UnixDateConverter))]
         [JsonProperty(PropertyName = "latest_activity_date")]
-        public DateTime LatestActivityDate { get; set; }
+        public DateTime? LatestActivityDate { get; set; }
 
         [TeamleaderDataType(Name = "close_date")]
         [JsonConverter(typeof(UnixDateConverter))]
         [JsonProperty(PropertyName = "close_date")]
-        public DateTime CloseDate { get; set; }
+        public DateTime? CloseDate { get; set; }
 
         [TeamleaderDataType(Name = "date_won")]
         [JsonConverter(typeof(UnixDateConverter))]
         [JsonProperty(PropertyName = "date_won")]
-        public DateTime DateWon { get; set; }
+        public DateTime? DateWon { get; set; }
 
         [TeamleaderDataType(Name = "date_added")]
         [JsonConverter(typeof(UnixDateConverter))]
         [JsonProperty(PropertyName = "date_added")]
-        public DateTime DateAdded { get; set; }
+        public DateTime? DateAdded { get; set; }
 
         [TeamleaderDataType(Name = "date_lost")]
         [JsonConverter(typeof(UnixDateConverter))]
         [JsonProperty(PropertyName = "date_lost")]
-        public DateTime DateLost { get; set; }
+        public DateTime? DateLost { get; set; }
 
         [TeamleaderDataType(Name = "date_last_activity")]
         [JsonConverter(typeof(UnixDateConverter))]
         [JsonProperty(PropertyName = "date_last_activity")]
-        public DateTime DateLastActivity { get; set; }
+        public DateTime? DateLastActivity { get; set; }
 
         [TeamleaderDataType(Name = "deleted")]
         [JsonProperty(PropertyName = "deleted")]
