@@ -14,8 +14,11 @@ namespace TeamleaderDotNet.Common.JsonConvertors
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
             JsonSerializer serializer)
         {
-            if (reader.Value.ToString() == "-1") return null;
-            return reader.Value.ToString().UnixTimeToDateTime();
+            if (string.IsNullOrEmpty(reader.Value.ToString()) || reader.Value.ToString() == "-1")
+            {
+                return null;
+            }
+             return reader.Value.ToString().UnixTimeToDateTime();
         }
 
         public override bool CanConvert(Type objectType)

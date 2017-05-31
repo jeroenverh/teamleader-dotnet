@@ -50,11 +50,13 @@
   <ItemGroup>
     <Compile Include="Common\ITeamleaderClient.cs" />
     <Compile Include="Common\TeamleaderClient.cs" />
+    <Compile Include="Common\Throttler.cs" />
     <Compile Include="Crm\Company.cs" />
     <Compile Include="Crm\Entity.cs" />
     <Compile Include="Crm\PaymentTerm.cs" />
     <Compile Include="Crm\TeamleaderDataTypeAttribute.cs" />
     <Compile Include="Common\JsonConvertors\UnixDateConverter.cs" />
+    <Compile Include="Deals\Deal.cs" />
     <Compile Include="General\BookkeepingAccount.cs" />
     <Compile Include="General\Department.cs" />
     <Compile Include="CustomFields\CustomField.cs" />
@@ -67,6 +69,7 @@
     <Compile Include="Invoices\PaymentStatus.cs" />
     <Compile Include="Invoices\PaymentTerm.cs" />
     <Compile Include="Invoices\VatTariff.cs" />
+    <Compile Include="TeamleaderDealsApi.cs" />
     <Compile Include="TeamleaderGeneralApi.cs" />
     <Compile Include="TeamleaderInvoicesApi.cs" />
     <Compile Include="TeamleaderCustomFieldsApi.cs" />
@@ -85,6 +88,7 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

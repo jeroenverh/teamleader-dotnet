@@ -44,7 +44,17 @@ namespace TeamleaderDotNet.Utils
         /// <returns>Returns a DateTime object that represents value of the Unix time.</returns>
         public static DateTime UnixTimeToDateTime(this string unixtime)
         {
-            return UnixTimeToDateTime(long.Parse(unixtime.ToString()));
+            return UnixTimeToDateTime(long.Parse(unixtime));
+        }
+
+        /// <summary>
+        ///     Convert Unix time value to a DateTime nullable object.
+        /// </summary>
+        /// <param name="unixtime">The Unix time stamp you want to convert to DateTime.</param>
+        /// <returns>Returns a DateTime object that represents value of the Unix time or null if the parameter was null or empty.</returns>
+        public static DateTime? UnixTimeToNullableDateTime(this string unixtime)
+        {
+            return !string.IsNullOrEmpty(unixtime) ? (DateTime?) UnixTimeToDateTime(long.Parse(unixtime)) : null;
         }
 
     }

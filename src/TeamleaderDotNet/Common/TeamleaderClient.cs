@@ -43,7 +43,7 @@ namespace TeamleaderDotNet.Common
             client.DefaultRequestHeaders.Add("User-Agent", _userAgent);
 
             // Call TeamleaderApiBase API
-            HttpResponseMessage response = await client.PostAsync(url, new FormUrlEncodedContent(fields));
+            HttpResponseMessage response = await Throttler.ExecuteTask(() => client.PostAsync(url, new FormUrlEncodedContent(fields)));
 
             var responseContent = response.Content;
 
@@ -82,7 +82,7 @@ namespace TeamleaderDotNet.Common
             client.DefaultRequestHeaders.Add("User-Agent", _userAgent);
 
             // Call TeamleaderApiBase API
-            HttpResponseMessage response = await client.PostAsync(url, new FormUrlEncodedContent(fields));
+            HttpResponseMessage response = await Throttler.ExecuteTask(() => client.PostAsync(url, new FormUrlEncodedContent(fields)));
 
             var responseContent = response.Content;
 

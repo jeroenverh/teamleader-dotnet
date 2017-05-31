@@ -53,6 +53,7 @@
     <Compile Include="TeamleaderClient.cs" />
     <Compile Include="CompaniesApi\GetCompanyTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ThrottlerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TeamleaderDotNet\TeamleaderDotNet.csproj">
