@@ -41,6 +41,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -56,6 +57,7 @@
     <Compile Include="Crm\PaymentTerm.cs" />
     <Compile Include="Crm\TeamleaderDataTypeAttribute.cs" />
     <Compile Include="Common\JsonConvertors\UnixDateConverter.cs" />
+    <Compile Include="CustomFields\CustomFieldInfo.cs" />
     <Compile Include="Deals\Deal.cs" />
     <Compile Include="General\BookkeepingAccount.cs" />
     <Compile Include="General\Department.cs" />

@@ -23,7 +23,7 @@ namespace TeamleaderDotNet.Common
                     var result = task.Invoke();
                     return result;
                 }
-                Task.Delay(TimeSpan.FromSeconds(1000));
+                Task.Delay(TimeSpan.FromSeconds(5));
             }
             s_timeOfFirstCall = DateTime.Now;
             s_currentNumberOfCalls = 1;

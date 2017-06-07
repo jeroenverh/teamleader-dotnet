@@ -21,7 +21,7 @@ namespace TeamleaderDotNet.Deals
 
         [TeamleaderDataType(Name = "for_id")]
         [JsonProperty(PropertyName = "for_id")]
-        public string ForId { get; set; }
+        public int ForId { get; set; }
 
         [TeamleaderDataType(Name = "offerte_nr")]
         [JsonProperty(PropertyName = "offerte_nr")]
