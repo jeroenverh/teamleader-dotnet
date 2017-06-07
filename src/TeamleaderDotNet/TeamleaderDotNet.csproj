@@ -59,6 +59,7 @@
     <Compile Include="Common\JsonConvertors\UnixDateConverter.cs" />
     <Compile Include="CustomFields\CustomFieldInfo.cs" />
     <Compile Include="Deals\Deal.cs" />
+    <Compile Include="Deals\Item.cs" />
     <Compile Include="General\BookkeepingAccount.cs" />
     <Compile Include="General\Department.cs" />
     <Compile Include="CustomFields\CustomField.cs" />
