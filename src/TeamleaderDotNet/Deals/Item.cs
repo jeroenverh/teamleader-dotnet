@@ -14,17 +14,17 @@ namespace TeamleaderDotNet.Deals
         [JsonProperty("subtitle")]
         public string SubTitle { get; set; }
         [JsonProperty("line_total_excl_vat")]
-        public double LineTotalPriceExclusiveVat { get; set; }
+        public decimal LineTotalPriceExclusiveVat { get; set; }
         [JsonProperty("line_total_incl_vat")]
-        public double LineTotalPriceInclusiveVat { get; set; }
+        public decimal LineTotalPriceInclusiveVat { get; set; }
         [JsonProperty("vat_rate")]
         public string VatRate { get; set; }
         [JsonProperty("account")]
         public string Account { get; set; }
         [JsonProperty("amount")]
-        public double Amount { get; set; }
+        public decimal Amount { get; set; }
         [JsonProperty("price_per_unit")]
-        public double? UnitPrice { get; set; }
+        public decimal? UnitPrice { get; set; }
         [JsonProperty("product_id")]
         public string ProductId { get; set; }
     }
