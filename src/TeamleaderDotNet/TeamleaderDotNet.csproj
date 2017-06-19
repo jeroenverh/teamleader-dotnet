@@ -72,6 +72,8 @@
     <Compile Include="Invoices\PaymentStatus.cs" />
     <Compile Include="Invoices\PaymentTerm.cs" />
     <Compile Include="Invoices\VatTariff.cs" />
+    <Compile Include="Products\Product.cs" />
+    <Compile Include="TeamleaderProductsApi.cs" />
     <Compile Include="TeamleaderDealsApi.cs" />
     <Compile Include="TeamleaderGeneralApi.cs" />
     <Compile Include="TeamleaderInvoicesApi.cs" />
