@@ -19,6 +19,9 @@ namespace TeamleaderDotNet.Deals
         [JsonProperty(PropertyName = "responsible_user_id")]
         public string ResponsibleUserId { get; set; }
 
+        [TeamleaderDataType(Name = "for")]
+        [JsonProperty(PropertyName = "for")]
+        public string For { get; set; }
 
         [TeamleaderDataType(Name = "for_id")]
         [JsonProperty(PropertyName = "for_id")]
