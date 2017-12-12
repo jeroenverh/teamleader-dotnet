@@ -52,7 +52,7 @@ namespace TeamleaderDotNet.Crm
         public string number { get; set; }
 
         [TeamleaderDataType(Name = "pricelist_id")]
-        public string pricelist_id { get; set; }
+        public long pricelist_id { get; set; }
 
         [TeamleaderDataType(Name = "date_added")]
         [JsonProperty(PropertyName = "date_added")]
@@ -60,7 +60,7 @@ namespace TeamleaderDotNet.Crm
         public DateTime DateAdded { get; set; }
 
         [TeamleaderDataType(Name = "account_manager_id")]
-        public string account_manager_id { get; set; }
+        public long account_manager_id { get; set; }
 
         [TeamleaderDataType(Name = "business_type")]
         public string business_type { get; set; }
