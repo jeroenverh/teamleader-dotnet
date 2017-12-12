@@ -12,17 +12,24 @@ namespace TeamleaderDotNet.Utils
     {
         public override bool CanConvert(Type objectType)
         {
-            return objectType == typeof(String);
+            return objectType == typeof(string);
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            return WebUtility.HtmlDecode((string)reader.Value);
+            if (reader.Value is string value)
+            {
+                return WebUtility.HtmlDecode(value);
+            }
+            return reader.Value;
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            writer.WriteRawValue(WebUtility.HtmlEncode((string)value));
+            if (value is string s)
+            {
+                writer.WriteRawValue(WebUtility.HtmlEncode(s));
+            }
         }
     }
 }
