@@ -59,6 +59,7 @@
     <Compile Include="Common\JsonConvertors\UnixDateConverter.cs" />
     <Compile Include="CustomFields\CustomFieldInfo.cs" />
     <Compile Include="Deals\Deal.cs" />
+    <Compile Include="Deals\Item.cs" />
     <Compile Include="General\BookkeepingAccount.cs" />
     <Compile Include="General\Department.cs" />
     <Compile Include="CustomFields\CustomField.cs" />
@@ -71,6 +72,8 @@
     <Compile Include="Invoices\PaymentStatus.cs" />
     <Compile Include="Invoices\PaymentTerm.cs" />
     <Compile Include="Invoices\VatTariff.cs" />
+    <Compile Include="Products\Product.cs" />
+    <Compile Include="TeamleaderProductsApi.cs" />
     <Compile Include="TeamleaderDealsApi.cs" />
     <Compile Include="TeamleaderGeneralApi.cs" />
     <Compile Include="TeamleaderInvoicesApi.cs" />
@@ -82,6 +85,7 @@
     <Compile Include="Crm\Contact.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\ApiArrayConvertor.cs" />
+    <Compile Include="Utils\HtmlEncodingConverter.cs" />
     <Compile Include="Utils\UnixTimestampExtensions.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using TeamleaderDotNet.Invoices;
+using TeamleaderDotNet.Utils;
 
 namespace TeamleaderDotNet.Common
 {
@@ -40,7 +41,7 @@ namespace TeamleaderDotNet.Common
 
             var result = jsonResponse;
 
-            return JsonConvert.DeserializeObject<T>(result);
+            return JsonConvert.DeserializeObject<T>(result, new HtmlEncodingConverter());
         }
 
         protected Stream DoStreamCall(string endPoint, List<KeyValuePair<string, string>> fields = null)
