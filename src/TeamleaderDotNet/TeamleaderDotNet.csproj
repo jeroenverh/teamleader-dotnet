@@ -50,6 +50,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\ITeamleaderClient.cs" />
+    <Compile Include="Common\JsonConvertors\CustomFieldsConverter.cs" />
+    <Compile Include="Common\JsonConvertors\DateConverter.cs" />
+    <Compile Include="Common\JsonConvertors\NumberSeries.cs" />
+    <Compile Include="Common\JsonConvertors\YesNoConverter.cs" />
     <Compile Include="Common\TeamleaderClient.cs" />
     <Compile Include="Common\Throttler.cs" />
     <Compile Include="Crm\Company.cs" />
@@ -72,10 +76,17 @@
     <Compile Include="Invoices\PaymentStatus.cs" />
     <Compile Include="Invoices\PaymentTerm.cs" />
     <Compile Include="Invoices\VatTariff.cs" />
+    <Compile Include="Planning\DayOff.cs" />
+    <Compile Include="Planning\DayOffByUser.cs" />
+    <Compile Include="Planning\PlanningTask.cs" />
     <Compile Include="Products\Product.cs" />
     <Compile Include="TeamleaderProductsApi.cs" />
     <Compile Include="TeamleaderDealsApi.cs" />
     <Compile Include="TeamleaderGeneralApi.cs" />
+    <Compile Include="TeamleaderPlanningApi.cs" />
+    <Compile Include="TeamleaderTicketsApi.cs" />
+    <Compile Include="TeamleaderUsersApi.cs" />
+    <Compile Include="TeamleaderTimetrackingApi.cs" />
     <Compile Include="TeamleaderInvoicesApi.cs" />
     <Compile Include="TeamleaderCustomFieldsApi.cs" />
     <Compile Include="TeamleaderContactsApi.cs" />
@@ -84,6 +95,17 @@
     <Compile Include="Common\TeamleaderApiBase.cs" />
     <Compile Include="Crm\Contact.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tickets\TicketMessage.cs" />
+    <Compile Include="Tickets\TicketMessageBase.cs" />
+    <Compile Include="Tickets\TicketMessageListItem.cs" />
+    <Compile Include="Tickets\TicketStatusTypes.cs" />
+    <Compile Include="Tickets\Ticket.cs" />
+    <Compile Include="Tickets\TicketListItem.cs" />
+    <Compile Include="Timetracking\ResponsibleUsers.cs" />
+    <Compile Include="Timetracking\TaskType.cs" />
+    <Compile Include="Timetracking\TimetrackingTask.cs" />
+    <Compile Include="Timetracking\TimetrackingTaskListItem.cs" />
+    <Compile Include="Users\User.cs" />
     <Compile Include="Utils\ApiArrayConvertor.cs" />
     <Compile Include="Utils\HtmlEncodingConverter.cs" />
     <Compile Include="Utils\UnixTimestampExtensions.cs" />

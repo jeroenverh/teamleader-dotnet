@@ -1,0 +1,11 @@
+﻿{
+  "id": 123456,
+  "ticket_id": 54321,
+  "message": "Done",
+  "raw_message": "",
+  "date": 1427362751,
+  "date_formatted": "26\/03\/2015 10:39",
+  "from": "teamleader_user",
+  "from_id": -1,
+  "internal_message": 0
+}

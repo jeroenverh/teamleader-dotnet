@@ -1,0 +1,7 @@
+﻿[{
+    "id": 12345,
+    "for": "todo",
+    "name": "Status",
+    "type": "enum",
+    "group": "All"
+}]

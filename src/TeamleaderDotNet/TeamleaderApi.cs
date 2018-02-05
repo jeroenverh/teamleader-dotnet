@@ -14,7 +14,11 @@ namespace TeamleaderDotNet
         private TeamleaderDealsApi _dealsApi;
         private TeamleaderCustomFieldsApi _customFieldsApi;
         private TeamleaderInvoicesApi _invoicesApi;
+        private TeamleaderPlanningApi _planningApi;
+        private TeamleaderTimetrackingApi _timetrackingApi;
+        private TeamleaderUsersApi _usersApi;
         private TeamleaderGeneralApi _generalApi;
+        private TeamleaderTicketsApi _ticketsApi;
         private TeamleaderProductsApi _productsApi;
 
         public TeamleaderApi(string apiGroup, string apiSecret)
@@ -48,6 +52,54 @@ namespace TeamleaderDotNet
                     _invoicesApi = new TeamleaderInvoicesApi(_teamleaderClient);
                 }
                 return _invoicesApi;
+            }
+        }
+
+        public TeamleaderPlanningApi Planning
+        {
+            get
+            {
+                if (_planningApi == null)
+                {
+                    _planningApi = new TeamleaderPlanningApi(_teamleaderClient);
+                }
+                return _planningApi;
+            }
+        }
+
+        public TeamleaderTimetrackingApi Timetracking
+        {
+            get
+            {
+                if (_timetrackingApi == null)
+                {
+                    _timetrackingApi = new TeamleaderTimetrackingApi(_teamleaderClient);
+                }
+                return _timetrackingApi;
+            }
+        }
+
+        public TeamleaderUsersApi Users
+        {
+            get
+            {
+                if (_usersApi == null)
+                {
+                    _usersApi = new TeamleaderUsersApi(_teamleaderClient);
+                }
+                return _usersApi;
+            }
+        }
+
+        public TeamleaderTicketsApi Tickets
+        {
+            get
+            {
+                if (_ticketsApi == null)
+                {
+                    _ticketsApi = new TeamleaderTicketsApi(_teamleaderClient);
+                }
+                return _ticketsApi;
             }
         }
 

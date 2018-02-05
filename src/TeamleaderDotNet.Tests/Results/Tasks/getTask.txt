@@ -1,0 +1,29 @@
+﻿{
+  "estimated_time_required": 0,
+  "estimated_time_used": 0,
+  "description": "Printing Best Practices\n- Optimize productivity\n- Save costs on paper, toner and components\n- Statistics to measure performance",
+  "finished": 0,
+  "date_finished": 0,
+  "date_finished_formatted": "",
+  "priority": "B",
+  "due_date": 1543561200,
+  "due_date_formatted": "30\/11\/2018",
+  "project_id": -1,
+  "project_name": "",
+  "milestone_name": "",
+  "related_ticket_id": -1,
+  "client_type": "company",
+  "client_id": 2916166,
+  "client_name": "Teamleader",
+  "responsible_users": {
+    "team_id": -1,
+    "users": [
+      12345
+    ]
+  },
+  "creator_name": "Test",
+  "custom_fields": {
+  },
+  "deleted": 0,
+  "type_id": 11400
+}

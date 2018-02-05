@@ -8,9 +8,8 @@ namespace TeamleaderDotNet.Common
         private static DateTime s_timeOfFirstCall;
         private static int s_currentNumberOfCalls;
         
-        // according to the teamleader documentation only 5 request per 25 seconds are allowed
-        private const int MaxNumberOfCalls = 5;
-        private static readonly TimeSpan s_throttlingDuration = TimeSpan.FromSeconds(25);
+        private const int MaxNumberOfCalls = 25;
+        private static readonly TimeSpan s_throttlingDuration = TimeSpan.FromSeconds(5);
 
         public static T ExecuteTask<T>(Func<T> task)
         {

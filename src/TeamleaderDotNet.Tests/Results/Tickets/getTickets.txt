@@ -1,0 +1,11 @@
+﻿[{
+		"id": 54321,
+		"for": "contact",
+		"for_id": -1,
+		"subject": "Reset old laptops",
+		"date_created": "16\/03\/2015",
+		"status": "closed",
+		"description": "",
+		"responsible_sys_client_id": -1,
+		"time_spent": "0"
+}]
