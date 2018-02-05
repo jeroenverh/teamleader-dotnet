@@ -6,12 +6,16 @@ using TeamleaderDotNet.Tickets;
 namespace TeamleaderDotNet.Tests.Tickets
 {
     [TestClass]
-    public class GetTicketsTests : TestBase
+    public class GetTicketsTests
     {
         [TestMethod]
         public async Task GetTickets()
         {
-            var results = await Client.Tickets.GetTickets(TicketStatusTypes.Closed);
+            var client = new MockTeamleaderClient();
+            client.LoadResultFromFile(@"Tickets\getTickets.txt");
+
+            var api = new TeamleaderApi(client);
+            var results = await api.Tickets.GetTickets(TicketStatusTypes.Closed);
 
             Assert.IsNotNull(results);
             Assert.IsTrue(results.Any());
@@ -20,7 +24,11 @@ namespace TeamleaderDotNet.Tests.Tickets
         [TestMethod]
         public async Task GetTicket()
         {
-            var result = await Client.Tickets.GetTicket(39764);
+            var client = new MockTeamleaderClient();
+            client.LoadResultFromFile(@"Tickets\getTicket.txt");
+
+            var api = new TeamleaderApi(client);
+            var result = await api.Tickets.GetTicket(54321);
 
             Assert.IsNotNull(result);
         }
@@ -28,7 +36,11 @@ namespace TeamleaderDotNet.Tests.Tickets
         [TestMethod]
         public async Task GetTicketMessages()
         {
-            var results = await Client.Tickets.GetTicketMessages(39764, true, true);
+            var client = new MockTeamleaderClient();
+            client.LoadResultFromFile(@"Tickets\getTicketMessages.txt");
+
+            var api = new TeamleaderApi(client);
+            var results = await api.Tickets.GetTicketMessages(54321, true, true);
 
             Assert.IsNotNull(results);
             Assert.IsTrue(results.Any());
@@ -37,7 +49,11 @@ namespace TeamleaderDotNet.Tests.Tickets
         [TestMethod]
         public async Task GetTicketMessage()
         {
-            var result = await Client.Tickets.GetTicketMessage(136015);
+            var client = new MockTeamleaderClient();
+            client.LoadResultFromFile(@"Tickets\getTicketMessage.txt");
+
+            var api = new TeamleaderApi(client);
+            var result = await api.Tickets.GetTicketMessage(123456);
 
             Assert.IsNotNull(result);
         }

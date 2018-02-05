@@ -1,0 +1,11 @@
+﻿{
+  "id": 12345,
+  "name": "Status",
+  "for": "todo",
+  "type": "enum",
+  "options": {
+    "18849": "Running",
+    "18850": "Done",
+    "18851": "Need info"
+  }
+}

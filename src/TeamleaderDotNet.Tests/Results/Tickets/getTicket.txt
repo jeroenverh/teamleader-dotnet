@@ -1,0 +1,16 @@
+﻿{
+  "id": 54321,
+  "subject": "Reset old laptops",
+  "date_created": 1426533713,
+  "status": "closed",
+  "date_closed": 1427362751,
+  "responsible_user_id": -1,
+  "for": "contact",
+  "for_id": -1,
+  "deleted": 0,
+  "optional_company_id": -1,
+  "background_info_html": "",
+  "custom_fields": [
+    
+  ]
+}

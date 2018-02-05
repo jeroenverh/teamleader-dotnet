@@ -55,7 +55,6 @@
     <Compile Include="TeamleaderClient.cs" />
     <Compile Include="CompaniesApi\GetCompanyTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestBase.cs" />
     <Compile Include="ThrottlerTests.cs" />
     <Compile Include="Tickets\GetTicketsTests.cs" />
     <Compile Include="TimetrackingApi\GetTasksTest.cs" />
@@ -70,6 +69,36 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="Results\CrmCompanies\getCompany.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Results\CustomFields\getCustomFieldInfo.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Results\CustomFields\getCustomFields.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Results\Tasks\getTask.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Results\Tasks\getTasks.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Results\Tasks\getTaskTypes.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Results\Tickets\getTicket.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Results\Tickets\getTicketMessage.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Results\Tickets\getTicketMessages.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Results\Tickets\getTickets.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Results\Users\getUsers.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

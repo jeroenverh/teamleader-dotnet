@@ -5,12 +5,16 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace TeamleaderDotNet.Tests.TimetrackingApi
 {
     [TestClass]
-    public class GetTasksTest : TestBase
+    public class GetTasksTest
     {
         [TestMethod]
         public async Task GetTasks()
         {
-            var results = await Client.Timetracking.GetTasks(3, 0);
+            var client = new MockTeamleaderClient();
+            client.LoadResultFromFile(@"Tasks\getTasks.txt");
+
+            var api = new TeamleaderApi(client);
+            var results = await api.Timetracking.GetTasks(3, 0);
 
             Assert.IsNotNull(results);
             Assert.IsTrue(results.Any());
@@ -19,7 +23,11 @@ namespace TeamleaderDotNet.Tests.TimetrackingApi
         [TestMethod]
         public async Task GetTask()
         {
-            var result = await Client.Timetracking.GetTask(2461696);
+            var client = new MockTeamleaderClient();
+            client.LoadResultFromFile(@"Tasks\getTask.txt");
+
+            var api = new TeamleaderApi(client);
+            var result = await api.Timetracking.GetTask(1234567);
 
             Assert.IsNotNull(result);
         }
@@ -27,7 +35,11 @@ namespace TeamleaderDotNet.Tests.TimetrackingApi
         [TestMethod]
         public async Task GetTaskTypes()
         {
-            var results = await Client.Timetracking.GetTaskTypes();
+            var client = new MockTeamleaderClient();
+            client.LoadResultFromFile(@"Tasks\getTaskTypes.txt");
+
+            var api = new TeamleaderApi(client);
+            var results = await api.Timetracking.GetTaskTypes();
 
             Assert.IsNotNull(results);
             Assert.IsTrue(results.Any());
