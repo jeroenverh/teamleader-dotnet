@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using TeamleaderDotNet.Common.JsonConvertors;
@@ -18,6 +19,9 @@ namespace TeamleaderDotNet.Deals
         [JsonProperty(PropertyName = "responsible_user_id")]
         public string ResponsibleUserId { get; set; }
 
+        [TeamleaderDataType(Name = "for")]
+        [JsonProperty(PropertyName = "for")]
+        public string For { get; set; }
 
         [TeamleaderDataType(Name = "for_id")]
         [JsonProperty(PropertyName = "for_id")]
@@ -93,6 +97,10 @@ namespace TeamleaderDotNet.Deals
         [TeamleaderDataType(Name = "deleted")]
         [JsonProperty(PropertyName = "deleted")]
         public bool Deleted{ get; set; }
+
+        [TeamleaderDataType(Name = "items")]
+        [JsonProperty(PropertyName = "items")]
+        public List<Item> Items { get; set; }
 
         [JsonProperty(PropertyName = "custom_fields")]
         public JObject CustomFields { get; set; }

@@ -19,6 +19,7 @@ namespace TeamleaderDotNet
         private TeamleaderUsersApi _usersApi;
         private TeamleaderGeneralApi _generalApi;
         private TeamleaderTicketsApi _ticketsApi;
+        private TeamleaderProductsApi _productsApi;
 
         public TeamleaderApi(string apiGroup, string apiSecret)
         {
@@ -111,6 +112,18 @@ namespace TeamleaderDotNet
                     _contactsApi = new TeamleaderContactsApi(_teamleaderClient);
                 }
                 return _contactsApi;
+            }
+        }
+
+        public TeamleaderProductsApi Products
+        {
+            get
+            {
+                if (_productsApi == null)
+                {
+                    _productsApi = new TeamleaderProductsApi(_teamleaderClient);
+                }
+                return _productsApi;
             }
         }
 

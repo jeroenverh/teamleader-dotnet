@@ -293,3 +293,8 @@ __pycache__/
 ### VisualStudio Patch ###
 # By default, sensitive information, such as encrypted password
 # should be stored in the .pubxml.user file.
+src/packages/
+[Bb]in
+[Dd]ebug*/
+[Rr]elease*/
+/src/.vs

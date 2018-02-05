@@ -63,6 +63,7 @@
     <Compile Include="Common\JsonConvertors\UnixDateConverter.cs" />
     <Compile Include="CustomFields\CustomFieldInfo.cs" />
     <Compile Include="Deals\Deal.cs" />
+    <Compile Include="Deals\Item.cs" />
     <Compile Include="General\BookkeepingAccount.cs" />
     <Compile Include="General\Department.cs" />
     <Compile Include="CustomFields\CustomField.cs" />
@@ -78,6 +79,8 @@
     <Compile Include="Planning\DayOff.cs" />
     <Compile Include="Planning\DayOffByUser.cs" />
     <Compile Include="Planning\PlanningTask.cs" />
+    <Compile Include="Products\Product.cs" />
+    <Compile Include="TeamleaderProductsApi.cs" />
     <Compile Include="TeamleaderDealsApi.cs" />
     <Compile Include="TeamleaderGeneralApi.cs" />
     <Compile Include="TeamleaderPlanningApi.cs" />
@@ -104,6 +107,7 @@
     <Compile Include="Timetracking\TimetrackingTaskListItem.cs" />
     <Compile Include="Users\User.cs" />
     <Compile Include="Utils\ApiArrayConvertor.cs" />
+    <Compile Include="Utils\HtmlEncodingConverter.cs" />
     <Compile Include="Utils\UnixTimestampExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
