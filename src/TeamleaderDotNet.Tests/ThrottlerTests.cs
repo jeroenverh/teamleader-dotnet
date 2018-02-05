@@ -16,12 +16,12 @@ namespace TeamleaderDotNet.Tests
         {
             var executedTasks = 0;
             var startTime = DateTime.Now;
-            for (int i = 0; i < 7; i++)
+            for (int i = 0; i < 26; i++)
             {
                 executedTasks = Throttler.ExecuteTask(() => executedTasks+1);
             }
-            Assert.IsTrue(executedTasks == 7);
-            Assert.IsTrue(DateTime.Now> startTime.Add(TimeSpan.FromSeconds(25)));
+            Assert.IsTrue(executedTasks == 26);
+            Assert.IsTrue(DateTime.Now> startTime.Add(TimeSpan.FromSeconds(5)));
         }
     }
 }
