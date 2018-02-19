@@ -19,6 +19,9 @@ namespace TeamleaderDotNet.Invoices
         [JsonProperty(PropertyName = "invoice_nr_detailed")]
         public string InvoiceNrDetailed { get; set; }
 
+        [JsonProperty(PropertyName = "comments")]
+        public string Comments { get; set; }
+
         [JsonProperty(PropertyName = "booked")]
         public bool Booked { get; set; }
 

@@ -28,8 +28,11 @@ namespace TeamleaderDotNet
             fields.Add(new KeyValuePair<string, string>("contact_or_company", createInvoiceRequest.contact_or_company));
             fields.Add(new KeyValuePair<string, string>("contact_or_company_id", createInvoiceRequest.contact_or_company_id.ToString()));
 
-            if(!string.IsNullOrWhiteSpace(createInvoiceRequest.for_attention_of))
+			if(!string.IsNullOrWhiteSpace(createInvoiceRequest.for_attention_of))
                 fields.Add(new KeyValuePair<string, string>("for_attention_of", createInvoiceRequest.for_attention_of));
+			
+            if(!string.IsNullOrWhiteSpace(createInvoiceRequest.comments))
+                fields.Add(new KeyValuePair<string, string>("comments", createInvoiceRequest.comments));
 
             if (createInvoiceRequest.layout_id.HasValue)
                 fields.Add(new KeyValuePair<string, string>("layout_id", createInvoiceRequest.layout_id.Value.ToString()));
@@ -56,6 +59,9 @@ namespace TeamleaderDotNet
 
                 if (invoiceLine.account.HasValue)
                     fields.Add(new KeyValuePair<string, string>(string.Format("account_{0}", invoiceLineId), invoiceLine.account.Value.ToString()));
+				
+				if (!string.IsNullOrWhiteSpace(invoiceLine.subtitle))
+					fields.Add(new KeyValuePair<string, string>(string.Format("subtitle_{0}", invoiceLineId), invoiceLine.subtitle));
             }
 
             fields.Add(new KeyValuePair<string, string>("draft_invoice", createInvoiceRequest.draft_invoice ? "1" : "0"));

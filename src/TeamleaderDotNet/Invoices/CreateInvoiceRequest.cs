@@ -41,6 +41,7 @@ namespace TeamleaderDotNet.Invoices
         public int sys_department_id { get; private set; }
         public int? layout_id { get; set; }
 
+        public string comments { get; set; }
         public string po_number { get; set; }
         public string for_attention_of { get; set; }
         public bool draft_invoice { get; set; }
@@ -76,6 +77,7 @@ namespace TeamleaderDotNet.Invoices
         }
 
         public string description { get; set; }
+        public string subtitle { get; set; }
         public double price { get; set; }
         public double amount { get; set; }
         public VatTariff VatTariff { get; set; }
